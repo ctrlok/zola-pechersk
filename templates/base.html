@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="{% if config.extra.default_theme %}{{ config.extra.default_theme }}-theme{% endif %}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}</title>
+    
+    {% if config.extra.default_theme %}
+    <style>
+        :root {
+            --color-mode: "{{ config.extra.default_theme }}";
+        }
+    </style>
+    {% endif %}
     
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ get_url(path="css/style.css") }}">
@@ -15,6 +23,7 @@
             {% if section.description %}
                 <p class="subtitle">{{ section.description }}</p>
             {% endif %}
+            <!-- Theme toggle will be inserted here by JavaScript -->
         </header>
 
         <main>

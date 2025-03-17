@@ -9,4 +9,7 @@ highlight_code = true
 highlight_theme = "base16-ocean-dark"
 
 [extra]
-author = "John Doe" 
+author = "John Doe"
+# Set default theme to "light" or "dark"
+# If not set, will use system preference or default to light
+default_theme = "light" 

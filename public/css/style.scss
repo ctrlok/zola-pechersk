@@ -1,8 +1,10 @@
-/* the props */
-@import url("open-props.css");
+@import "open-props.css";
+@import "open-props-normalize.min.css";
 
-/* optional imports that use the props */
-@import url("open-props-normalize.min.css");
+// Example mixin for transitions
+@mixin smooth-transition($property, $time) {
+  transition: #{$property} $time;
+}
 
 /* Define color variables */
 :root {
@@ -66,8 +68,8 @@ body {
     line-height: var(--font-lineheight-3);
     color: var(--text-color);
     background-color: var(--bg-color);
-    transition: background-color var(--transition-ease-slow), 
-                color var(--transition-ease-slow);
+    @include smooth-transition(background-color, var(--transition-ease-slow)), 
+                smooth-transition(color, var(--transition-ease-slow));
 }
 
 .container {
@@ -89,7 +91,7 @@ img {
 a {
     color: var(--blue-7);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    @include smooth-transition(color, var(--transition-fast));
 }
 
 a:hover {
@@ -107,32 +109,31 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
 
-/* Theme toggle styles */
-.theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--size-2);
-    border-radius: var(--radius-round);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color);
-    font-size: var(--font-size-1);
-    margin-left: auto;
-    transition: background-color var(--transition-ease-fast);
-}
+    .theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: var(--size-2);
+        border-radius: var(--radius-round);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        font-size: var(--font-size-1);
+        margin-left: auto;
+        @include smooth-transition(background-color, var(--transition-ease-fast));
 
-.theme-toggle:hover {
-    background-color: var(--surface-2);
-}
+        &:hover {
+            background-color: var(--surface-2);
+        }
 
-.theme-toggle svg {
-    width: var(--size-5);
-    height: var(--size-5);
-    fill: currentColor;
+        svg {
+            width: var(--size-5);
+            height: var(--size-5);
+            fill: currentColor;
+        }
+    }
 }
 
 .dark-theme .theme-toggle .sun-icon,
@@ -189,12 +190,12 @@ header h1 a:hover {
 main {
     display: flex;
     flex: 1;
-}
 
-article {
-    flex: 1;
-    max-width: var(--content-max-width);
-    margin: 0 auto;
+    article {
+        flex: 1;
+        max-width: var(--content-max-width);
+        margin: 0 auto;
+    }
 }
 
 /* Typography */
@@ -232,7 +233,7 @@ h5 {
 h6 {
     font-size: var(--font-size-fluid-1);
     font-weight: var(--font-weight-3);
-    border-bottom: var(--border-size-1) solid var(--border-color);
+    border-bottom: var (--border-size-1) solid var(--border-color);
 }
 
 p {
@@ -380,7 +381,7 @@ hr {
 .post-preview .post-title a {
     color: var(--gray-9);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    @include smooth-transition(color, var(--transition-fast));
 }
 
 .post-preview .post-title a:hover {
@@ -404,7 +405,7 @@ hr {
     color: var(--blue-7);
     text-decoration: none;
     font-weight: var(--font-weight-5);
-    transition: all var(--transition-fast);
+    @include smooth-transition(all, var(--transition-fast));
     gap: var(--size-2);
 }
 
@@ -415,7 +416,7 @@ hr {
 
 .read-more::after {
     content: "→";
-    transition: transform var(--transition-fast);
+    @include smooth-transition(transform, var(--transition-fast));
 }
 
 .read-more:hover::after {
@@ -480,7 +481,7 @@ a.footnote-reference:hover {
 
 /* Default state for footnote definitions */
 .footnote-definition {
-    transition: all var(--transition-fast);
+    @include smooth-transition(all, var(--transition-fast));
 }
 
 @media (max-width: 1200px) {

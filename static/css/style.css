@@ -6,6 +6,7 @@
 
 /* Define color variables */
 :root {
+    /* Base variables shared across themes */
     --accent-pink: rgb(255, 99, 202);
     --accent-blue: rgb(0, 159, 255);
     --accent-cyan: rgb(18, 207, 227);
@@ -13,21 +14,60 @@
     --gradient-1: linear-gradient(to right, var(--pink-7), var(--blue-7), var(--cyan-7), var(--blue-8));
     --gradient-2: linear-gradient(to right, var(--accent-pink), var(--accent-blue), var(--accent-cyan), var(--accent-blue-2));
     --main-gradient: var(--gradient-2);
-}
-
-
-
-/* Global Styles */
-:root {
     --page-max-width: calc(var(--size-lg) + var(--size-13) + var(--size-fluid-2) + 6px);
     --content-max-width: var(--size-md);
 }
 
+/* Light theme (default) */
+:root,
+.light-theme {
+    color-scheme: light;
+    
+    /* Light theme specific variables */
+    --text-color: var(--gray-8);
+    --bg-color: var(--surface-1);
+    --surface-1: var(--gray-0);
+    --surface-2: var(--gray-1);
+    --border-color: var(--gray-3);
+    --muted-color: var(--gray-6);
+}
+
+/* Dark theme */
+.dark-theme {
+    color-scheme: dark;
+    
+    /* Dark theme specific variables */
+    --text-color: var(--gray-2);
+    --bg-color: var(--surface-1);
+    --surface-1: var(--gray-9);
+    --surface-2: var(--gray-8);
+    --border-color: var(--gray-7);
+    --muted-color: var(--gray-5);
+}
+
+/* System preference based theme */
+@media (prefers-color-scheme: dark) {
+    :root:not(.light-theme) {
+        color-scheme: dark;
+        
+        /* Inherit dark theme variables */
+        --text-color: var(--gray-2);
+        --bg-color: var(--surface-1);
+        --surface-1: var(--gray-9);
+        --surface-2: var(--gray-8);
+        --border-color: var(--gray-7);
+        --muted-color: var(--gray-5);
+    }
+}
+
+/* Global Styles */
 body {
     font-family: var(--font-sans);
     line-height: var(--font-lineheight-3);
-    color: var(--gray-8);
-    background-color: var(--surface-1);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color var(--transition-ease-slow), 
+                color var(--transition-ease-slow);
 }
 
 .container {
@@ -63,7 +103,46 @@ header {
     font-size: var(--font-size-fluid-1);
     margin-bottom: var(--size-fluid-0);
     margin-top: var(--size-fluid-0);
-    border-bottom: var(--border-size-1) solid var(--gray-3);
+    border-bottom: var(--border-size-1) solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--size-2);
+    border-radius: var(--radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: var(--font-size-1);
+    margin-left: auto;
+    transition: background-color var(--transition-ease-fast);
+}
+
+.theme-toggle:hover {
+    background-color: var(--surface-2);
+}
+
+.theme-toggle svg {
+    width: var(--size-5);
+    height: var(--size-5);
+    fill: currentColor;
+}
+
+.dark-theme .theme-toggle .sun-icon,
+:root:not(.dark-theme) .theme-toggle .moon-icon {
+    display: block;
+}
+
+.dark-theme .theme-toggle .moon-icon,
+:root:not(.dark-theme) .theme-toggle .sun-icon {
+    display: none;
 }
 
 h1 {
@@ -130,7 +209,7 @@ h2, h3, h4, h5, h6 {
 
 h2 {
     font-size: var(--font-size-fluid-3);
-    border-bottom: var(--border-size-1) solid var(--gray-3);
+    border-bottom: var(--border-size-1) solid var(--border-color);
     font-weight: var(--font-weight-1);
 }
 
@@ -141,7 +220,7 @@ h3 {
 
 h4 {
     font-size: var(--font-size-fluid-2);
-    border-bottom: var(--border-size-1) solid var(--gray-3);
+    border-bottom: var(--border-size-1) solid var(--border-color);
     font-weight: var(--font-weight-1);
 }
 
@@ -153,7 +232,7 @@ h5 {
 h6 {
     font-size: var(--font-size-fluid-1);
     font-weight: var(--font-weight-3);
-    border-bottom: var(--border-size-1) solid var(--gray-3);
+    border-bottom: var(--border-size-1) solid var(--border-color);
 }
 
 p {
@@ -231,7 +310,7 @@ table {
 }
 
 th, td {
-    border: var(--border-size-1) solid var(--gray-3);
+    border: var(--border-size-1) solid var(--border-color);
     padding: var(--size-3);
     text-align: left;
 }
@@ -249,7 +328,7 @@ tr:nth-child(even) {
 hr {
     border: 0;
     height: var(--border-size-1);
-    background-color: var(--gray-3);
+    background-color: var(--border-color);
     margin: var(--size-fluid-4) 0;
 }
 
@@ -285,7 +364,7 @@ hr {
 .post-preview {
     margin-bottom: var(--size-fluid-4);
     padding-bottom: var (--size-fluid-3);
-    border-bottom: var(--border-size-1) solid var(--gray-3);
+    border-bottom: var(--border-size-1) solid var(--border-color);
     position: relative;
 }
 
@@ -358,8 +437,8 @@ footer {
     text-align: center;
     padding: var(--size-fluid-3) 0;
     margin-top: var(--size-fluid-3);
-    border-top: var(--border-size-1) solid var(--gray-3);
-    color: var(--gray-6);
+    border-top: var(--border-size-1) solid var(--border-color);
+    color: var(--muted-color);
 }
 
 .footnote-definition {
@@ -373,7 +452,7 @@ footer {
 .footnote-definition[id*="left"] {
     float: left;
     margin-left: calc(-1 * var(--size-13) - var(--size-fluid-2));
-    border-right: var(--border-size-1) solid var(--gray-3);
+    border-right: var(--border-size-1) solid var(--border-color);
     padding-left: var(--size-0);
     padding-right: var(--size-2);
 }
@@ -381,7 +460,7 @@ footer {
 .footnote-definition[id*="right"] {
     float: right;
     margin-right: calc(-1 * var(--size-13) - var(--size-fluid-2));
-    border-left: var(--border-size-1) solid var(--gray-3);
+    border-left: var(--border-size-1) solid var(--border-color);
     padding-left: var(--size-3);
     padding-right: var(--size-0);
 }
