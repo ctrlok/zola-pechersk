@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}</title>
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="{{ get_url(path="css/style.css") }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="{{ config.base_url }}">{{ config.title }}</a>
+            {% if section.description %}
+                <p class="subtitle">{{ section.description }}</p>
+            {% endif %}
+        </header>
+
+        <main>
+            <article>
+                {% block content %}{% endblock %}
+            </article>
+        </main>
+
+        <footer>
+            <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }}. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ get_url(path="js/footnotes.js") }}"></script>
+</body>
+</html> 
