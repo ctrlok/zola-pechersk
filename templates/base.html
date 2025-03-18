@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="{% if config.extra.default_theme %}{{ config.extra.default_theme }}-theme{% endif %}">
+<html lang="en" 
+    {% if config.extra.default_theme == "light" %}
+        class="light-theme" data-theme="light"
+    {% elif config.extra.default_theme == "dark" %}
+        class="dark-theme" data-theme="dark"
+    {% else %}
+        data-default-theme="auto"
+    {% endif %}
+    {% if config.extra.enable_theme_selector %}
+        data-theme-selector-enabled
+    {% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}</title>
-    
-    {% if config.extra.default_theme %}
-    <style>
-        :root {
-            --color-mode: "{{ config.extra.default_theme }}";
-        }
-    </style>
-    {% endif %}
     
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ get_url(path="css/style.css") }}">
@@ -23,7 +25,7 @@
             {% if section.description %}
                 <p class="subtitle">{{ section.description }}</p>
             {% endif %}
-            <!-- Theme toggle will be inserted here by JavaScript -->
+            <!-- Theme toggle will be inserted here by JavaScript if enabled -->
         </header>
 
         <main>
@@ -39,5 +41,10 @@
     
     <!-- Custom JavaScript -->
     <script src="{{ get_url(path="js/footnotes.js") }}"></script>
+    
+    <!-- Include theme switcher JS for auto theme or when theme selector is enabled -->
+    {% if config.extra.default_theme == "auto" or config.extra.enable_theme_selector %}
+        <script src="{{ get_url(path="js/theme-switcher.js") }}"></script>
+    {% endif %}
 </body>
-</html> 
+</html>

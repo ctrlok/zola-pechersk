@@ -10,6 +10,9 @@ highlight_theme = "base16-ocean-dark"
 
 [extra]
 author = "John Doe"
-# Set default theme to "light" or "dark"
-# If not set, will use system preference or default to light
-default_theme = "light" 
+
+# Theme settings
+# default_theme: "light", "dark", or "auto" (uses system preference)
+default_theme = "light"
+# Enable theme selector in UI (true/false)
+enable_theme_selector = true
