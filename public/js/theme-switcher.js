@@ -6,8 +6,19 @@ document.addEventListener('DOMContentLoaded', function() {
         AUTO: 'auto'
     };
     
+    // Flavor constants
+    const FLAVORS = {
+        NONE: 'none',
+        HAPPY_HEADERS: 'happy-headers',
+        HAPPY: 'happy',
+        DEEP_HEADERS: 'deep-headers',
+        DEEP: 'deep',
+        MONOCHROME: 'monochrome'
+    };
+    
     // Cookie settings
     const THEME_COOKIE_NAME = 'preferred-theme';
+    const FLAVOR_COOKIE_NAME = 'preferred-flavor';
     const COOKIE_EXPIRY_DAYS = 365;
     
     // Check if theme selector is enabled in config
@@ -16,6 +27,32 @@ document.addEventListener('DOMContentLoaded', function() {
         const htmlElement = document.documentElement;
         // Check if the enable_theme_selector config option is true
         return htmlElement.hasAttribute('data-theme-selector-enabled');
+    }
+    
+    // Check if flavor selector is enabled in config
+    function isFlavorSelectorEnabled() {
+        // We'll use a data attribute on the html element to pass this info from the template
+        const htmlElement = document.documentElement;
+        // Check if the enable_flavor_selector config option is true
+        return htmlElement.hasAttribute('data-flavor-selector-enabled');
+    }
+    
+    // Check if static flavor is set (flavor selector disabled but default flavor set)
+    function hasStaticFlavor() {
+        const htmlElement = document.documentElement;
+        return htmlElement.hasAttribute('data-static-flavor');
+    }
+    
+    // Get the static flavor value
+    function getStaticFlavor() {
+        const htmlElement = document.documentElement;
+        const staticFlavor = htmlElement.getAttribute('data-static-flavor');
+        
+        if (staticFlavor && Object.values(FLAVORS).includes(staticFlavor)) {
+            return staticFlavor;
+        }
+        
+        return FLAVORS.NONE;
     }
     
     // Get the default theme from the HTML element
@@ -31,6 +68,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Get the default flavor from the HTML element
+    function getDefaultFlavor() {
+        const htmlElement = document.documentElement;
+        const defaultFlavor = htmlElement.getAttribute('data-default-flavor');
+        
+        if (defaultFlavor && Object.values(FLAVORS).includes(defaultFlavor)) {
+            return defaultFlavor;
+        }
+        
+        // If no valid default flavor is set, return 'none'
+        return FLAVORS.NONE;
+    }
+    
     // Get theme from cookie or config default
     function getCurrentTheme() {
         const cookieTheme = getCookie(THEME_COOKIE_NAME);
@@ -40,6 +90,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // If no cookie, use the default theme from config
         return getDefaultTheme();
+    }
+    
+    // Get flavor from cookie or config default
+    function getCurrentFlavor() {
+        // If static flavor is set, always use that
+        if (hasStaticFlavor()) {
+            return getStaticFlavor();
+        }
+        
+        // Only use cookie if flavor selector is enabled
+        if (isFlavorSelectorEnabled()) {
+            const cookieFlavor = getCookie(FLAVOR_COOKIE_NAME);
+            if (cookieFlavor && Object.values(FLAVORS).includes(cookieFlavor)) {
+                return cookieFlavor;
+            }
+        }
+        
+        // If no cookie or flavor selector is disabled, use the default flavor from config
+        return getDefaultFlavor();
     }
     
     // Apply theme to document based on system preference or cookie
@@ -58,17 +127,47 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update the active state in the theme switcher if it exists
         if (isThemeSelectorEnabled()) {
-            updateActiveSwitchState(theme);
+            updateActiveThemeSwitchState(theme);
         }
         
         // Save preference to cookie
         setCookie(THEME_COOKIE_NAME, theme, COOKIE_EXPIRY_DAYS);
     }
     
-    // Create theme switcher UI
+    // Apply flavor to document
+    function applyFlavor(flavor) {
+        // If static flavor is set, don't change the flavor
+        if (hasStaticFlavor()) {
+            // Just update the UI to match the static flavor
+            if (isFlavorSelectorEnabled()) {
+                updateActiveFlavorSwitchState(getStaticFlavor());
+            }
+            return;
+        }
+        
+        // Remove all flavor classes
+        Object.values(FLAVORS).forEach(f => {
+            document.documentElement.classList.remove(`${f}-flavor`);
+        });
+        
+        if (flavor !== FLAVORS.NONE) {
+            // Add the new flavor class
+            document.documentElement.classList.add(`${flavor}-flavor`);
+        }
+        
+        // Update the active state in the flavor switcher if it exists
+        if (isFlavorSelectorEnabled()) {
+            updateActiveFlavorSwitchState(flavor);
+            
+            // Save preference to cookie only if flavor selector is enabled
+            setCookie(FLAVOR_COOKIE_NAME, flavor, COOKIE_EXPIRY_DAYS);
+        }
+    }
+    
+    // Create theme and flavor switcher UI
     function createThemeSwitcher() {
-        // Only create the UI if theme selector is enabled in config
-        if (!isThemeSelectorEnabled()) {
+        // Only create the UI if theme selector or flavor selector is enabled in config
+        if (!isThemeSelectorEnabled() && !isFlavorSelectorEnabled()) {
             return;
         }
         
@@ -89,9 +188,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const themeDropdown = document.createElement('div');
         themeDropdown.className = 'theme-dropdown';
-        themeDropdown.innerHTML = `
-            <div class="theme-options">
-                <h3>Theme Settings</h3>
+        
+        let dropdownHTML = '<div class="theme-options">';
+        
+        // Add theme options if enabled
+        if (isThemeSelectorEnabled()) {
+            dropdownHTML += `
+                <h3>Theme Mode</h3>
                 <div class="theme-switches">
                     <label class="switch-container">
                         <input type="radio" name="theme" value="${THEMES.AUTO}" id="theme-auto">
@@ -106,8 +209,40 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="switch-label">Dark</span>
                     </label>
                 </div>
-            </div>
-        `;
+            `;
+        }
+        
+        // Add flavor options if enabled
+        if (isFlavorSelectorEnabled()) {
+            dropdownHTML += `
+                <h3>Theme Flavor</h3>
+                <div class="theme-switches">
+                    <label class="switch-container">
+                        <input type="radio" name="flavor" value="${FLAVORS.HAPPY_HEADERS}" id="flavor-happy-headers">
+                        <span class="switch-label">Happy Headers</span>
+                    </label>
+                    <label class="switch-container">
+                        <input type="radio" name="flavor" value="${FLAVORS.HAPPY}" id="flavor-happy">
+                        <span class="switch-label">Happy</span>
+                    </label>
+                    <label class="switch-container">
+                        <input type="radio" name="flavor" value="${FLAVORS.DEEP_HEADERS}" id="flavor-deep-headers">
+                        <span class="switch-label">Deep Headers</span>
+                    </label>
+                    <label class="switch-container">
+                        <input type="radio" name="flavor" value="${FLAVORS.DEEP}" id="flavor-deep">
+                        <span class="switch-label">Deep</span>
+                    </label>
+                    <label class="switch-container">
+                        <input type="radio" name="flavor" value="${FLAVORS.MONOCHROME}" id="flavor-monochrome">
+                        <span class="switch-label">Monochrome</span>
+                    </label>
+                </div>
+            `;
+        }
+        
+        dropdownHTML += '</div>';
+        themeDropdown.innerHTML = dropdownHTML;
         
         // Append elements to the DOM
         configMenu.appendChild(themeToggle);
@@ -126,23 +261,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Add event listeners to radio buttons
-        const radioButtons = themeDropdown.querySelectorAll('input[type="radio"]');
-        radioButtons.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.checked) {
-                    applyTheme(this.value);
-                    themeDropdown.classList.remove('active');
-                }
+        // Add event listeners to theme radio buttons if theme selector is enabled
+        if (isThemeSelectorEnabled()) {
+            const themeRadioButtons = themeDropdown.querySelectorAll('input[name="theme"]');
+            themeRadioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        applyTheme(this.value);
+                    }
+                });
             });
-        });
+        }
+        
+        // Add event listeners to flavor radio buttons if flavor selector is enabled
+        if (isFlavorSelectorEnabled()) {
+            const flavorRadioButtons = themeDropdown.querySelectorAll('input[name="flavor"]');
+            flavorRadioButtons.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.checked) {
+                        applyFlavor(this.value);
+                    }
+                });
+            });
+        }
     }
     
     // Update the active state in the theme switcher
-    function updateActiveSwitchState(theme) {
+    function updateActiveThemeSwitchState(theme) {
         const radioButtons = document.querySelectorAll('input[name="theme"]');
         radioButtons.forEach(radio => {
             radio.checked = radio.value === theme;
+        });
+    }
+    
+    // Update the active state in the flavor switcher
+    function updateActiveFlavorSwitchState(flavor) {
+        const radioButtons = document.querySelectorAll('input[name="flavor"]');
+        radioButtons.forEach(radio => {
+            radio.checked = radio.value === flavor;
         });
     }
     
@@ -165,14 +321,28 @@ document.addEventListener('DOMContentLoaded', function() {
         return null;
     }
     
-    // Initialize theme
+    // Initialize theme and flavor
     function initTheme() {
         // Always apply the theme from cookie or default
         const currentTheme = getCurrentTheme();
         applyTheme(currentTheme);
         
-        // Only create the theme switcher UI if enabled in config
+        // Apply the flavor from cookie or default
+        const currentFlavor = getCurrentFlavor();
+        applyFlavor(currentFlavor);
+        
+        // Create the theme/flavor switcher UI if enabled in config
         createThemeSwitcher();
+        
+        // Debug information
+        if (window.console && window.console.log) {
+            console.log('Theme system initialized:');
+            console.log('- Current theme:', currentTheme);
+            console.log('- Current flavor:', currentFlavor);
+            console.log('- Theme selector enabled:', isThemeSelectorEnabled());
+            console.log('- Flavor selector enabled:', isFlavorSelectorEnabled());
+            console.log('- Static flavor:', hasStaticFlavor() ? getStaticFlavor() : 'none');
+        }
     }
     
     // Run initialization

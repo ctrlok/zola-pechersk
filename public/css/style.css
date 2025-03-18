@@ -4,16 +4,14 @@
 /* optional imports that use the props */
 @import url("open-props-normalize.min.css");
 
+/* Import flavor styles */
+@import url("flavors.css");
+
+/* Import menu styles */
+@import url("menu.css");
+
 /* Define color variables */
 :root {
-    /* Base variables shared across themes */
-    --accent-pink: rgb(255, 99, 202);
-    --accent-blue: rgb(0, 159, 255);
-    --accent-cyan: rgb(18, 207, 227);
-    --accent-blue-2: rgb(10, 135, 211);
-    --gradient-1: linear-gradient(to right, var(--pink-7), var(--blue-7), var(--cyan-7), var(--blue-8));
-    --gradient-2: linear-gradient(to right, var(--accent-pink), var(--accent-blue), var(--accent-cyan), var(--accent-blue-2));
-    --main-gradient: var(--gradient-1);
     --page-max-width: calc(var(--size-lg) + var(--size-13) + var(--size-fluid-2) + 6px);
     --content-max-width: var(--size-md);
 }
@@ -28,8 +26,11 @@
     --bg-color: var(--surface-1);
     --surface-1: var(--gray-0);
     --surface-2: var(--gray-1);
+    --surface-3: var(--gray-2);
+    --surface-4: var(--gray-3);
     --border-color: var(--gray-3);
     --muted-color: var(--gray-6);
+    --tip-color: var(--green-3);
 }
 
 /* Dark theme */
@@ -41,8 +42,11 @@
     --bg-color: var(--surface-1);
     --surface-1: var(--gray-9);
     --surface-2: var(--gray-8);
+    --surface-3: var(--gray-7);
+    --surface-4: var(--gray-6);
     --border-color: var(--gray-7);
     --muted-color: var(--gray-5);
+    --tip-color: var(--green-7);
 }
 
 /* System preference based theme (auto) */
@@ -55,7 +59,9 @@
         --bg-color: var(--surface-1);
         --surface-1: var(--gray-9);
         --surface-2: var(--gray-8);
-        --border-color: var(--gray-7);
+        --surface-3: var(--gray-7);
+        --surface-4: var(--gray-6);
+        --border-color: var(--gray-8);
         --muted-color: var(--gray-5);
     }
 }
@@ -66,9 +72,11 @@
         
         /* Inherit light theme variables */
         --text-color: var(--gray-8);
-        --bg-color: var(--surface-1);
-        --surface-1: var(--gray-0);
-        --surface-2: var(--gray-1);
+        --bg-color: var(--white-0);
+        --surface-1: var(--white-0);
+        --surface-2: var(--gray-0);
+        --surface-3: var(--gray-3);
+        --surface-4: var(--gray-5);
         --border-color: var(--gray-3);
         --muted-color: var(--gray-6);
     }
@@ -114,7 +122,7 @@ a:hover {
 /* Header Styles */
 header {
     text-align: left;
-    font-size: var(--font-size-fluid-1);
+    font-size: var(--font-size-1);
     margin-bottom: var(--size-fluid-0);
     margin-top: var(--size-fluid-0);
     border-bottom: var(--border-size-1) solid var(--border-color);
@@ -123,93 +131,14 @@ header {
     align-items: center;
 }
 
-/* Theme toggle styles */
-.config-menu {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--size-2);
-    border-radius: var(--radius-round);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+header a {
     color: var(--text-color);
-    font-size: var(--font-size-1);
-    margin-left: auto;
-    transition: background-color var(--transition-ease-fast);
 }
 
-.theme-toggle:hover {
-    background-color: var(--surface-2);
-}
-
-.theme-toggle svg {
-    width: var(--size-5);
-    height: var(--size-5);
-    fill: currentColor;
-}
-
-.theme-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: var(--surface-1);
-    border: var(--border-size-1) solid var(--border-color);
-    border-radius: var(--radius-2);
-    padding: var(--size-4);
-    box-shadow: var(--shadow-3);
-    min-width: 200px;
-    z-index: 100;
-    display: none;
-    margin-top: var(--size-2);
-}
-
-.theme-dropdown.active {
-    display: block;
-}
-
-.theme-options h3 {
-    margin-top: 0;
-    margin-bottom: var(--size-3);
-    font-size: var(--font-size-2);
-    border-bottom: var(--border-size-1) solid var(--border-color);
-    padding-bottom: var(--size-2);
-}
-
-.theme-switches {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-3);
-}
-
-.switch-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.switch-container input[type="radio"] {
-    margin-right: var(--size-3);
-    cursor: pointer;
-}
-
-.switch-label {
-    font-size: var(--font-size-1);
-}
 
 h1 {
     font-size: var(--font-size-fluid-3);
     font-weight: var(--font-weight-1);
-    background-image: var(--main-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
 }
 
 header h1 a {
@@ -256,13 +185,9 @@ article {
 }
 
 /* Typography */
-h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     margin-top: var(--size-fluid-3);
     margin-bottom: var(--size-fluid-2);
-    background-image: var(--main-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
 }
 
 h2 {
@@ -330,20 +255,61 @@ pre code {
 
 /* Blockquote */
 blockquote {
-    background-color: var(--surface-2);
-    border-left: var(--size-1) solid var(--blue-6);
+    background-color: var(--surface-1);
+    border-left: var(--border-size-1) solid var(--border-color);
     padding: var(--size-fluid-2);
     margin: var(--size-fluid-3) 0;
     font-style: italic;
-    border-radius: var(--radius-2);
 }
 
 blockquote cite {
     display: block;
-    margin-top: var(--size-3);
+    margin-top: var(--size-fluid-2);
     font-style: normal;
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-3);
     text-align: right;
+}
+
+blockquote cite::before {
+    content: "— ";
+}
+
+blockquote p {
+    margin: 0;
+}
+
+.markdown-alert-note {
+    background-color: var(--surface-2);
+    position: relative;
+    padding: var(--size-fluid-2);
+}
+
+.markdown-alert-note::before {
+    content: "NOTE";
+    font-style: normal;
+    position: absolute;
+    bottom: var(--size-1);
+    right: var(--size-1);
+    color: var(--surface-3);
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-4);
+}
+
+.markdown-alert-tip {
+    background-color: var(--surface-2);
+    position: relative;
+    padding: var(--size-fluid-2);
+}
+
+.markdown-alert-tip::before {
+    content: "TIP";
+    font-style: normal;
+    position: absolute;
+    bottom: var(--size-1);
+    right: var(--size-1);
+    color: var(--surface-3);
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-4);
 }
 
 /* Figure */
@@ -501,14 +467,22 @@ footer {
 
 .footnote-definition {
     width: var(--size-13);
+    z-index: var(--layer-2);
+    margin-bottom: var(--size-3); /* Add spacing between footnotes */
+    position: relative; /* Ensure proper stacking */
 }
 
 .footnote-definition * {
-    font-size: var(--font-size-0) !important;
+    font-size: var(--font-size-0);
+}
+
+.footnote-definition p {
+    margin-bottom: var(--size-fluid-0);
 }
 
 .footnote-definition[id*="left"] {
     float: left;
+    clear: left; /* Prevent overlapping with other left footnotes */
     margin-left: calc(-1 * var(--size-13) - var(--size-fluid-2));
     border-right: var(--border-size-1) solid var(--border-color);
     padding-left: var(--size-0);
@@ -517,6 +491,7 @@ footer {
 
 .footnote-definition[id*="right"] {
     float: right;
+    clear: right; /* Prevent overlapping with other right footnotes */
     margin-right: calc(-1 * var(--size-13) - var(--size-fluid-2));
     border-left: var(--border-size-1) solid var(--border-color);
     padding-left: var(--size-3);
@@ -543,7 +518,7 @@ a.footnote-reference:hover {
 
 @media (max-width: 1200px) {
     .footnote-definition * {
-        font-size: var(--font-size-2) !important;
+        font-size: var(--font-size-2);
     }
     .footnote-definition[id*="left"],
     .footnote-definition[id*="right"] {

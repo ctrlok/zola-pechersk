@@ -4,10 +4,12 @@ date = 2024-03-20
 description = "A demonstration of HTML elements commonly found in Markdown"
 +++
 
-This is a zola template with support of all common Markdown elements and 
-sidenotes [^1 right].
+This is a zola template with <mark>support</mark> of all ~~common~~ ^Markdown^ ~elements~ and 
+sidenotes [^1 left]. 
 
-[^1 right]: This is a sidenote
+### header
+
+[^1 left]: This is a sidenote
 
     It can be placed on right or left side.
     Via small JS script it calculates position of paragraph it refers to. 
@@ -45,7 +47,7 @@ sidenotes [^1 right].
 ###### Why Use Markdown?
 
 
-Here are some reasons why Markdown is popular [^2 right]:
+Here are some reasons [^3 left] why Markdown is popular [^2 left]:
 
 * It's **easy** to learn and use
 * It's *readable* even in its raw form
@@ -53,7 +55,7 @@ Here are some reasons why Markdown is popular [^2 right]:
 * It's widely supported across various platforms
 
 
-[^2 right]: This is a sidenote
+[^2 left]: This is a sidenote
 
     This is another paragraph in the sidenote. 
     This is another paragraph in the sidenote. 
@@ -61,12 +63,12 @@ Here are some reasons why Markdown is popular [^2 right]:
     This is another paragraph in the sidenote. 
     This is another paragraph in the sidenote. 
 
-    * List item 1
-    * List item 2
 
-this is a text
-this is a text
-this is a text
+[^3 left]:
+    this is a text
+
+    this is a text
+    this is a text
 
 
 ## Examples of Markdown Elements
@@ -99,9 +101,49 @@ You can create links like [this one to Example.com](https://www.example.com).
 
 ### Blockquotes
 
-> This is a blockquote. Markdown is often used in documentation and readme files.
+> Markdown is a lightweight **markup** language with plain text formatting syntax.
+> It is designed so that it can be converted to ^HTML^ and ~many~ other formats.
+> Markdown is often used to format ~~readme~~ files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+> It is easy to learn and use, making it a popular choice for many writers and developers.
 > 
-> — John Doe
+> <cite>Markdown Guide, Generating Data</cite>
+
+
+> [!NOTE]
+>
+> Markdown is a lightweight **markup** language with plain text formatting syntax.
+> It is designed so that it can be converted to ^HTML^ and ~many~ other formats.
+> Markdown is often used to format ~~readme~~ files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+> It is easy to learn and use, making it a popular choice for many writers and developers.
+
+> [!TIP]
+>
+> Markdown is a lightweight **markup** language with plain text formatting syntax.
+> It is designed so that it can be converted to ^HTML^ and ~many~ other formats.
+> Markdown is often used to format ~~readme~~ files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+> It is easy to learn and use, making it a popular choice for many writers and developers.
+
+> [!IMPORTANT]
+>
+> Markdown is a lightweight **markup** language with plain text formatting syntax.
+> It is designed so that it can be converted to ^HTML^ and ~many~ other formats.
+> Markdown is often used to format ~~readme~~ files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+> It is easy to learn and use, making it a popular choice for many writers and developers.
+
+
+> [!WARNING]
+>
+> Markdown is a lightweight **markup** language with plain text formatting syntax.
+> It is designed so that it can be converted to ^HTML^ and ~many~ other formats.
+> Markdown is often used to format ~~readme~~ files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+> It is easy to learn and use, making it a popular choice for many writers and developers.
+
+> [!CAUTION]
+>
+> Markdown is a lightweight **markup** language with plain text formatting syntax.
+> It is designed so that it can be converted to ^HTML^ and ~many~ other formats.
+> Markdown is often used to format ~~readme~~ files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+> It is easy to learn and use, making it a popular choice for many writers and developers.
 
 ### Code
 

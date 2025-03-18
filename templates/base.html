@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" 
     {% if config.extra.default_theme == "light" %}
-        class="light-theme" data-theme="light"
+        class="light-theme {% if config.extra.default_flavor %}{{ config.extra.default_flavor }}-flavor{% endif %}" data-theme="light"
     {% elif config.extra.default_theme == "dark" %}
-        class="dark-theme" data-theme="dark"
+        class="dark-theme {% if config.extra.default_flavor %}{{ config.extra.default_flavor }}-flavor{% endif %}" data-theme="dark"
     {% else %}
-        data-default-theme="auto"
+        class="{% if config.extra.default_flavor %}{{ config.extra.default_flavor }}-flavor{% endif %}" data-default-theme="auto"
     {% endif %}
     {% if config.extra.enable_theme_selector %}
         data-theme-selector-enabled
+    {% endif %}
+    {% if config.extra.enable_flavor_selector %}
+        data-flavor-selector-enabled
+    {% else %}
+        {% if config.extra.default_flavor %}
+        data-static-flavor="{{ config.extra.default_flavor }}"
+        {% endif %}
+    {% endif %}
+    {% if config.extra.default_flavor %}
+        data-default-flavor="{{ config.extra.default_flavor }}"
     {% endif %}>
 <head>
     <meta charset="UTF-8">
@@ -42,8 +52,8 @@
     <!-- Custom JavaScript -->
     <script src="{{ get_url(path="js/footnotes.js") }}"></script>
     
-    <!-- Include theme switcher JS for auto theme or when theme selector is enabled -->
-    {% if config.extra.default_theme == "auto" or config.extra.enable_theme_selector %}
+    <!-- Include theme switcher JS for auto theme or when theme/flavor selector is enabled -->
+    {% if config.extra.default_theme == "auto" or config.extra.enable_theme_selector or config.extra.enable_flavor_selector %}
         <script src="{{ get_url(path="js/theme-switcher.js") }}"></script>
     {% endif %}
 </body>

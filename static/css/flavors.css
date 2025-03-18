@@ -1,0 +1,72 @@
+/* Flavor definitions for the theme system
+ * This file contains all flavor-specific styles that can be applied
+ * independently of the light/dark theme selection.
+ *
+ * These styles will be applied at build time if flavor selector is disabled,
+ * or dynamically via JavaScript if flavor selector is enabled.
+ */
+
+/* Base flavor styles that apply to all flavors */
+:root {
+  /* Default flavor is none/standard */
+  --header-gradient: none;
+  --bold-gradient: none;
+  --accent-pink: rgb(255, 99, 202);
+  --accent-blue: rgb(0, 159, 255);
+  --accent-cyan: rgb(18, 207, 227);
+  --accent-blue-2: rgb(10, 135, 211);
+  --gradient-1: linear-gradient(to right, var(--pink-7), var(--blue-7), var(--cyan-7), var(--blue-8));
+  --gradient-2: linear-gradient(to right, var(--accent-pink), var(--accent-blue), var(--accent-cyan), var(--accent-blue-2));
+  --flavour-bold-gradient: none;
+  --flavour-bold-color-text: var(--color-text);
+}
+
+/* Happy Headers flavor - colorful headers with gradient-2 */
+.happy-headers-flavor {
+  --flavour-header-gradient: var(--gradient-2);
+  --flavour-header-color-text: transparent;
+}
+
+/* Happy flavor - colorful headers and bold text with gradient-2 */
+.happy-flavor {
+  --flavour-header-gradient: var(--gradient-2);
+  --flavour-header-color-text: transparent;
+  --flavour-bold-gradient: var(--gradient-2);
+  --flavour-bold-color-text: transparent;
+}
+
+/* Deep Headers flavor - colorful headers with gradient-1 */
+.deep-headers-flavor {
+  --flavour-header-gradient: var(--gradient-1);
+  --flavour-header-color-text: transparent;
+}
+
+/* Deep flavor - colorful headers and bold text with gradient-1 */
+.deep-flavor {
+  --flavour-header-gradient: var(--gradient-1);
+  --flavour-header-color-text: transparent;
+  --flavour-bold-gradient: var(--gradient-1);
+  --flavour-bold-color-text: transparent;
+}
+
+/* Monochrome flavor - no gradients, just plain text */
+.monochrome-flavor {
+  --flavour-header-gradient: none;
+  --flavour-header-color-text: var(--text-color);
+}
+
+/* Apply gradients to elements based on flavor variables */
+h1, h2, h3, h4, h5, h6, header {
+  background-image: var(--flavour-header-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: var(--flavour-header-color-text);
+}
+
+strong, b {
+  background-image: var(--flavour-bold-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: var(--flavour-bold-color-text);
+  font-weight: bold;
+}
