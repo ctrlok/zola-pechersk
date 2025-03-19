@@ -1,0 +1,122 @@
+@use 'variables' as *
+
+:root
+  --footnote-width: var(--size-13)
+  --footnote-margin: var(--size-fluid-2)
+
+
+.footnote-definition
+  width: var(--footnote-width)
+  z-index: var(--layer-2)
+  margin-top: 1px
+  //margin-bottom: var(--size-3)
+  position: relative
+  float: right
+  clear: right
+  margin-right: calc(-1 * var(--footnote-width) - var(--footnote-margin))
+  border-left: var(--border-size-1) solid var(--border-color-sidenote)
+  padding-left: var(--size-3)
+  padding-right: 0
+  transition: margin-right 0.3s ease-out, width 0.3s ease-out
+  
+  *
+    display: inline-flex
+    color: var(--muted-color)
+    font-size: var(--font-size-0)
+    font-weight: var(--font-weight-2)
+    line-height: var(--font-lineheight-1)
+
+  p
+    margin-top: 0
+    margin-bottom: 0
+
+  // First paragraph after the label should be inline
+  .footnote-definition-label + p
+    width: calc(100% - var(--size-1))
+
+  sup.footnote-definition-label
+    color: var(--muted-color)
+    line-height: var(--font-lineheight-1)
+    display: inline-block
+    margin-left: -0.7rem
+    position: relative
+    left: -0.01rem
+
+  &[id*="left"]
+    float: left
+    clear: left
+    margin-left: calc(-1 * var(--footnote-width) - var(--footnote-margin))
+    margin-right: 0
+    border-left: none
+    border-right: var(--border-size-1) solid var(--border-color-sidenote)
+    padding-left: 0
+    padding-right: var(--size-2)
+    
+    sup.footnote-definition-label
+      left: -0.01rem
+
+// Styles for clickable footnote references
+sup.footnote-reference
+  font-size: var(--font-size-0)
+  line-height: var(--font-lineheight-1)
+  color: var(--muted-color)
+  position: relative
+  left: -0.01rem
+  margin-left: -2px
+  :link
+    text-decoration: none
+    color: var(--text-color)
+    cursor: pointer
+    position: relative
+
+  &:hover
+    text-decoration: none
+
+  :visited
+    color: var(--text-color)
+
+// Responsive footnote sizes
+@media (max-width: 1290px)
+  :root
+    --footnote-width: var(--size-12)
+    --footnote-margin: var(--size-4)
+
+// Responsive styles for smaller screens
+@media (max-width: 1100px)
+  .footnote-definition
+    float: none
+    width: 97%
+    padding-left: var(--size-2)
+    padding-right: 0
+    border-left: none
+    background-color: var(--surface-1)
+    box-shadow: var(--shadow-2)
+    margin-top: var(--size-3)
+
+
+    *
+      font-size: var(--font-size-0)
+
+    &[id*="left"]
+      float: none
+      border-right: none
+      margin-left: 0
+      margin-right: 0
+      padding-left: var(--size-2)
+      padding-right: 0
+      border-left: none
+      border-right: none
+
+      sup.footnote-definition-label
+        margin-left: -0.9rem
+        position: relative
+        left: -0.3rem
+
+    .footnote-definition-label + p
+      width: calc(100% - var(--size-1))
+
+    sup.footnote-definition-label
+      margin-left: -0.9rem
+      position: relative
+      left: -0.3rem
+  // other overrides

@@ -1,10 +1,10 @@
-# Zola Blog Theme with Light/Dark Mode and Flavor System
+# Zola Blog Theme with Light/Dim Mode and Flavor System
 
-This is a Zola theme with light/dark mode and flavor system support using [Open Props](https://open-props.style/).
+This is a Zola theme with light/dim mode and flavor system support using [Open Props](https://open-props.style/).
 
 ## Features
 
-- Light and dark mode support
+- Light and dim mode support
 - Theme toggle button
 - Automatic system preference detection
 - Multiple theme flavors (happy, deep, monochrome, etc.)
@@ -21,7 +21,7 @@ You can set the default theme and flavor in your `config.toml` file:
 ```toml
 [extra]
 # Theme settings
-default_theme = "light" # "light", "dark", or "auto"
+default_theme = "light" # "light", "dim", or "auto"
 enable_theme_selector = true # Show theme selector in UI
 
 # Flavor settings
@@ -30,13 +30,14 @@ enable_flavor_selector = true # Show flavor selector in UI
 ```
 
 If not specified, the theme will use:
+
 1. User's previously saved preference (stored in cookies)
 2. System preference for theme (if available)
 3. Light mode and no flavor as fallback
 
 ### Flavor System
 
-The flavor system allows you to apply different styles to your site independently of the light/dark theme:
+The flavor system allows you to apply different styles to your site independently of the light/dim theme:
 
 - **none**: Standard styling without gradients
 - **happy-headers**: Colorful headers with bright gradient
@@ -47,13 +48,15 @@ The flavor system allows you to apply different styles to your site independentl
 
 #### Build-time Flavors
 
-If `enable_flavor_selector` is set to `false`, the selected `default_flavor` will be applied at build time and cannot be changed by users. This is useful for sites where you want a consistent look and don't want users to be able to change the flavor.
+If `enable_flavor_selector` is set to `false`, the selected `default_flavor` will be applied at build time and cannot be
+changed by users. This is useful for sites where you want a consistent look and don't want users to be able to change
+the flavor.
 
 ## Implementation Details
 
 ### CSS
 
-The theme uses Open Props for styling with light/dark mode and flavor support:
+The theme uses Open Props for styling with light/dim mode and flavor support:
 
 - CSS variables for colors, spacing, and typography
 - Theme variables defined in `:root` and theme-specific classes
@@ -64,7 +67,7 @@ The theme uses Open Props for styling with light/dark mode and flavor support:
 
 The theme-switcher.js file handles:
 
-- Theme toggling (light/dark/auto)
+- Theme toggling (light/dim/auto)
 - Flavor selection
 - Preference storage in cookies
 - System preference detection
@@ -74,7 +77,7 @@ The theme-switcher.js file handles:
 
 Users can access theme settings by clicking the gear icon in the header. This opens a dropdown with options for:
 
-- Theme mode (Auto/Light/Dark)
+- Theme mode (Auto/Light/Dim)
 - Theme flavor (if enabled)
 
 Preferences are saved to cookies and will be remembered on future visits.
@@ -85,7 +88,7 @@ Preferences are saved to cookies and will be remembered on future visits.
 
 To customize the colors:
 
-1. Edit the CSS variables in the `:root`, `.light-theme`, and `.dark-theme` selectors in `static/css/style.css`
+1. Edit the CSS variables in the `:root`, `.light-theme`, and `.dim-theme` selectors in `static/css/style.css`
 2. Update the gradient colors in the `--gradient-1` and `--gradient-2` variables
 
 ### Adding New Flavors

@@ -1,32 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" 
-    {% if config.extra.default_theme == "light" %}
-        class="light-theme {% if config.extra.default_flavor %}{{ config.extra.default_flavor }}-flavor{% endif %}" data-theme="light"
-    {% elif config.extra.default_theme == "dark" %}
-        class="dark-theme {% if config.extra.default_flavor %}{{ config.extra.default_flavor }}-flavor{% endif %}" data-theme="dark"
-    {% else %}
-        class="{% if config.extra.default_flavor %}{{ config.extra.default_flavor }}-flavor{% endif %}" data-default-theme="auto"
+<html lang="{{ lang }}"
+    {% if config.extra.color_scheme == "light" %}
+        color-scheme="light"
+    {% elif config.extra.color_scheme == "dark" %}
+        color-scheme="dark"
     {% endif %}
-    {% if config.extra.enable_theme_selector %}
-        data-theme-selector-enabled
+
+    {% if config.extra.flavor %}
+      flavor="{{ config.extra.flavor }}"
     {% endif %}
-    {% if config.extra.enable_flavor_selector %}
-        data-flavor-selector-enabled
-    {% else %}
-        {% if config.extra.default_flavor %}
-        data-static-flavor="{{ config.extra.default_flavor }}"
-        {% endif %}
-    {% endif %}
-    {% if config.extra.default_flavor %}
-        data-default-flavor="{{ config.extra.default_flavor }}"
-    {% endif %}>
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}</title>
     
     <!-- Custom styles -->
-    <link rel="stylesheet" href="{{ get_url(path="css/style.css") }}">
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
 </head>
 <body>
     <div class="container">
@@ -51,10 +41,8 @@
     
     <!-- Custom JavaScript -->
     <script src="{{ get_url(path="js/footnotes.js") }}"></script>
+    <!-- Syntax highlighting theme -->
+    <link rel="stylesheet" href="{{ get_url(path="css/syntax-theme-deep.css") }}">
     
-    <!-- Include theme switcher JS for auto theme or when theme/flavor selector is enabled -->
-    {% if config.extra.default_theme == "auto" or config.extra.enable_theme_selector or config.extra.enable_flavor_selector %}
-        <script src="{{ get_url(path="js/theme-switcher.js") }}"></script>
-    {% endif %}
 </body>
 </html>

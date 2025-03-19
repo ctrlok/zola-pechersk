@@ -6,29 +6,28 @@ build_search_index = true
 
 [markdown]
 highlight_code = true
-highlight_theme = "base16-ocean-dark"
+highlight_theme = "css"
 definition_list = true
+gfm = true
+subsupscript = true
+
+[languages.ua.translations]
+summary = "Мій блог"
+
+[translations]
+summary = "My blog"
 
 [extra]
 author = "John Doe"
 
-# Theme settings
-# default_theme: "light", "dark", or "auto" (uses system preference)
-default_theme = "dark"
-# Enable theme selector in UI (true/false)
-enable_theme_selector = true
+# Theme settings: auto, light, dark, default = auto
+color_scheme = "auto"
 
 # Flavor settings
 # default_flavor: Sets the default flavor to use
-#   - "none": No special styling (default)
 #   - "happy-headers": Colorful headers with gradient-2
 #   - "happy": Colorful headers and bold text with gradient-2
 #   - "deep-headers": Colorful headers with gradient-1
 #   - "deep": Colorful headers and bold text with gradient-1
 #   - "monochrome": Plain black text for headers and bold text
-default_flavor = "deep-headers"
-
-# Enable flavor selector in UI (true/false)
-# If set to true: Users can change flavors via UI, preference stored in cookies
-# If set to false: The default_flavor is applied at build time and cannot be changed by users
-enable_flavor_selector = true
+flavor = "deep-headers"

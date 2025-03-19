@@ -1,0 +1,77 @@
+
+@mixin alertBox()
+  position: relative
+  padding: var(--size-4) var(--size-4) var(--size-4) var(--size-6)
+  border-radius: var(--radius-2)
+  border-left: none
+  overflow: hidden
+  box-shadow: var(--shadow-6)
+  backdrop-filter: blur(4px)
+  transition: transform 0.2s ease, box-shadow 0.2s ease
+
+  // Modern accent element
+  &:before
+    content: var(--warning-content)
+    position: absolute
+    left: 0
+    top: 0
+    bottom: 0
+    width: var(--border-size-2)
+    border-radius: var(--radius-round) 0 0 var(--radius-round)
+    box-shadow: var(--shadow-6)
+    z-index: 2
+    animation: pulse 3s infinite alternate
+
+  // Subtle glow effect
+  &:after
+    content: ""
+    position: absolute
+    left: var(--border-size-2)
+    top: 0
+    bottom: 0
+    width: var(--size-3)
+    z-index: 1
+    pointer-events: none
+    backdrop-filter: blur(2px)
+    opacity: 0.6
+
+@keyframes pulse
+  0%
+    opacity: 0.8
+    transform: scaleY(0.98)
+  100%
+    opacity: 1
+    transform: scaleY(1)
+
+.markdown-alert-note
+  @include alertBox()
+
+.markdown-alert-tip
+  @include alertBox()
+
+.markdown-alert-important
+  @include alertBox()
+
+.markdown-alert-warning
+  @include alertBox()
+
+.markdown-alert-caution
+  @include alertBox()
+
+
+blockquote
+  border-left: var(--border-size-1) solid var(--border-color)
+  padding: var(--size-fluid-2)
+  margin: var(--size-fluid-3) 0
+
+  cite
+    display: block
+    margin-top: var(--size-fluid-2)
+    font-style: normal
+    text-align: right
+
+    &::before
+      content: "— "
+
+  p
+    margin: 0

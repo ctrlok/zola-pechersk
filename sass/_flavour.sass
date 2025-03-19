@@ -1,0 +1,232 @@
+@use 'variables' as *
+
+// Theme color mixins
+@mixin happy-theme-colors
+  html[flavor="happy"], html[flavor="happy-headers"]
+    .markdown-alert-note:before
+      background: linear-gradient(to bottom, rgba(232, 240, 243, 0.76), rgb(223, 227, 231))
+    .markdown-alert-tip:before
+      background: linear-gradient(to bottom, rgba(22, 188, 240, 0.76), rgba(22, 188, 240, 0.71), rgb(30, 207, 227))
+    .markdown-alert-important:before
+      background: linear-gradient(to bottom, rgb(28, 160, 252), rgba(39, 164, 252, 0.76), rgb(194, 121, 217) 120%)
+    .markdown-alert-warning:before
+      background: linear-gradient(to bottom, rgb(241, 227, 167), rgb(253, 248, 123), rgb(16, 175, 248) 110%)
+    .markdown-alert-caution:before
+      background: linear-gradient(to bottom, rgb(232, 70, 88), rgb(246, 66, 135), rgb(239, 110, 207), rgb(16, 175, 248) 120%)
+
+@mixin deep-theme-colors
+  html[flavor="deep"], html[flavor="deep-headers"]
+    .markdown-alert-note:before
+      background: linear-gradient(to bottom, var(--blue-7), var(--blue-8), var(--blue-9))
+    .markdown-alert-tip:before
+      background: linear-gradient(to bottom, var(--green-7), var(--green-8), var(--green-9))
+    .markdown-alert-important:before
+      background: linear-gradient(to bottom, var(--purple-7), var(--purple-8), var(--purple-9))
+    .markdown-alert-warning:before
+      background: linear-gradient(to bottom, var(--yellow-7), var(--yellow-8), var(--yellow-9))
+    .markdown-alert-caution:before
+      background: linear-gradient(to bottom, var(--red-7), var(--red-8), var(--red-9))
+
+@mixin monochrome-light
+    .markdown-alert-note:before
+        background: linear-gradient(to bottom, var(--gray-3), var(--gray-4), var(--gray-5))
+    .markdown-alert-tip:before
+        background: linear-gradient(to bottom, var(--gray-4), var(--gray-5), var(--gray-6))
+    .markdown-alert-important:before
+        background: linear-gradient(to bottom, var(--gray-5), var(--gray-6), var(--gray-7))
+    .markdown-alert-warning:before
+        background: linear-gradient(to bottom, var(--gray-6), var(--gray-7), var(--gray-6))
+    .markdown-alert-caution:before
+      background: linear-gradient(to bottom, var(--gray-9), var(--gray-10), var(--gray-12))
+
+@mixin monochrome-dark
+    .markdown-alert-note:before
+        background: linear-gradient(to bottom, var(--gray-8), var(--gray-7), var(--gray-8))
+    .markdown-alert-tip:before
+        background: linear-gradient(to bottom, var(--gray-7), var(--gray-7), var(--gray-8))
+    .markdown-alert-important:before
+        background: linear-gradient(to bottom, var(--gray-6), var(--gray-6), var(--gray-6))
+    .markdown-alert-warning:before
+        background: linear-gradient(to bottom, var(--gray-5), var(--gray-6), var(--gray-5))
+    .markdown-alert-caution:before
+        background: linear-gradient(to bottom, var(--gray-1), var(--gray-2), var(--gray-1))
+
+// Create separate light/dark variants for deep theme
+@mixin deep-theme-colors-light
+  .markdown-alert-note:before
+    background: linear-gradient(to bottom, var(--blue-7), var(--blue-8), var(--blue-9))
+  .markdown-alert-tip:before
+    background: linear-gradient(to bottom, var(--green-7), var(--green-8), var(--green-9))
+  .markdown-alert-important:before
+    background: linear-gradient(to bottom, var(--purple-7), var(--purple-8), var(--purple-9))
+  .markdown-alert-warning:before
+    background: linear-gradient(to bottom, var(--yellow-7), var(--yellow-8), var(--yellow-9))
+  .markdown-alert-caution:before
+    background: linear-gradient(to bottom, var(--red-7), var(--red-8), var(--red-9))
+
+@mixin deep-theme-colors-dark
+  .markdown-alert-note:before
+    background: linear-gradient(to bottom, var(--blue-7), var(--blue-8), var(--blue-9))
+  .markdown-alert-tip:before
+    background: linear-gradient(to bottom, var(--green-7), var(--green-8), var(--green-9))
+  .markdown-alert-important:before
+    background: linear-gradient(to bottom, var(--purple-7), var(--purple-8), var(--purple-9))
+  .markdown-alert-warning:before
+    background: linear-gradient(to bottom, var(--yellow-7), var(--yellow-8), var(--yellow-9))
+  .markdown-alert-caution:before
+    background: linear-gradient(to bottom, var(--red-7), var(--red-8), var(--red-9))
+
+// Create separate light/dark variants for happy theme
+@mixin happy-theme-colors-light
+  .markdown-alert-note:before
+    background: linear-gradient(to bottom, rgba(232, 240, 243, 0.76), rgb(223, 227, 231))
+  .markdown-alert-tip:before
+    background: linear-gradient(to bottom, rgba(22, 188, 240, 0.76), rgba(22, 188, 240, 0.71), rgb(30, 207, 227))
+  .markdown-alert-important:before
+    background: linear-gradient(to bottom, rgb(28, 160, 252), rgba(39, 164, 252, 0.76), rgb(194, 121, 217) 120%)
+  .markdown-alert-warning:before
+    background: linear-gradient(to bottom, rgb(241, 227, 167), rgb(253, 248, 123), rgb(16, 175, 248) 110%)
+  .markdown-alert-caution:before
+    background: linear-gradient(to bottom, rgb(232, 70, 88), rgb(246, 66, 135), rgb(239, 110, 207), rgb(16, 175, 248) 120%)
+
+@mixin happy-theme-colors-dark
+  .markdown-alert-note:before
+    background: linear-gradient(to bottom, rgba(232, 240, 243, 0.76), rgb(223, 227, 231))
+  .markdown-alert-tip:before
+    background: linear-gradient(to bottom, rgba(22, 188, 240, 0.76), rgba(22, 188, 240, 0.71), rgb(30, 207, 227))
+  .markdown-alert-important:before
+    background: linear-gradient(to bottom, rgb(28, 160, 252), rgba(39, 164, 252, 0.76), rgb(194, 121, 217) 120%)
+  .markdown-alert-warning:before
+    background: linear-gradient(to bottom, rgb(241, 227, 167), rgb(253, 248, 123), rgb(16, 175, 248) 110%)
+  .markdown-alert-caution:before
+    background: linear-gradient(to bottom, rgb(232, 70, 88), rgb(246, 66, 135), rgb(239, 110, 207), rgb(16, 175, 248) 120%)
+
+@mixin happy-headers
+  // Define accent colors
+  $accent-1: rgb(255, 99, 202)
+  $accent-2: rgb(0, 159, 255)
+  $accent-3: rgb(18, 207, 227)
+  $accent-4: rgb(10, 135, 211)
+  // Output as custom properties
+  --accent-1: #{$accent-1}
+  --accent-2: #{$accent-2}
+  --accent-3: #{$accent-3}
+  --accent-4: #{$accent-4}
+  // Compute gradient using custom properties
+  --flavour-header-gradient: linear-gradient(to right, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4))
+  --flavour-header-color-text: transparent
+  
+  // Apply appropriate theme variant based on color scheme
+  &[color-scheme="light"]
+    +happy-theme-colors-light
+  @media (prefers-color-scheme: light)
+    &:not([color-scheme])
+      +happy-theme-colors-light
+  &[color-scheme="dark"]
+    +happy-theme-colors-dark
+  @media (prefers-color-scheme: dark)
+    &:not([color-scheme])
+      +happy-theme-colors-dark
+
+@mixin deep-headers
+  $accent-1: var(--pink-7)
+  $accent-2: var(--blue-7)
+  $accent-3: var(--cyan-7)
+  $accent-4: var(--blue-8)
+  --accent-1: #{$accent-1}
+  --accent-2: #{$accent-2}
+  --accent-3: #{$accent-3}
+  --accent-4: #{$accent-4}
+  --flavour-header-gradient: linear-gradient(to right, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4))
+  --flavour-header-color-text: transparent
+  
+  // Apply appropriate theme variant based on color scheme
+  &[color-scheme="light"]
+    +deep-theme-colors-light
+  @media (prefers-color-scheme: light)
+    &:not([color-scheme])
+      +deep-theme-colors-light
+  &[color-scheme="dark"]
+    +deep-theme-colors-dark
+  @media (prefers-color-scheme: dark)
+    &:not([color-scheme])
+      +deep-theme-colors-dark
+
+@mixin set-flavor($flavor)
+  @if $flavor == "happy" or $flavor == "happy-headers"
+    +happy-headers
+    @if $flavor == "happy"
+      --font-weight-strong: var(--font-weight-4)
+      --flavour-bold-gradient: var(--flavour-header-gradient)
+      --flavour-bold-color-text: var(--flavour-header-color-text)
+    @else
+      --font-weight-strong: var(--font-weight-5)
+      --flavour-bold-gradient: none
+      --flavour-bold-color-text: var(--text-color)
+    +happy-theme-colors
+  @else if $flavor == "deep" or $flavor == "deep-headers"
+    +deep-headers
+    @if $flavor == "deep"
+      --font-weight-strong: var(--font-weight-4)
+      --flavour-bold-gradient: var(--flavour-header-gradient)
+      --flavour-bold-color-text: var(--flavour-header-color-text)
+    @else
+      --font-weight-strong: var(--font-weight-5)
+      --flavour-bold-gradient: none
+      --flavour-bold-color-text: var(--text-color)
+    +deep-theme-colors
+  @else
+    // monochrome (default)
+    --font-weight-strong: var(--font-weight-5)
+    --flavour-header-gradient: none
+    --flavour-header-color-text: var(--text-color)
+    --flavour-bold-gradient: none
+    --flavour-bold-color-text: var(--text-color)
+    &[color-scheme="light"]
+      +monochrome-light
+    @media (prefers-color-scheme: light)
+      &:not([color-scheme])
+        +monochrome-light
+    &[color-scheme="dark"]
+      +monochrome-dark
+    @media (prefers-color-scheme: dark)
+      &:not([color-scheme])
+        +monochrome-dark
+
+:root
+  // Default to monochrome flavor
+  +set-flavor("monochrome")
+
+// Force flavor based on HTML attribute
+html
+  &[flavor="happy"]
+    +set-flavor("happy")
+
+  &[flavor="happy-headers"]
+    +set-flavor("happy-headers")
+
+  &[flavor="deep"]
+    +set-flavor("deep")
+
+  &[flavor="deep-headers"]
+    +set-flavor("deep-headers")
+
+  &[flavor="monochrome"]
+    +set-flavor("monochrome")
+
+// Apply gradients to elements
+h1, h2, h3, h4, h5, h6, header
+  background-image: var(--flavour-header-gradient)
+  background-size: $content-max-width
+  background-clip: text
+  -webkit-background-clip: text
+  color: var(--flavour-header-color-text)
+
+strong, b
+  background-image: var(--flavour-bold-gradient)
+  background-clip: text
+  -webkit-background-clip: text
+  color: var(--flavour-bold-color-text)
+  font-weight: var(--font-weight-strong)
+
+

@@ -1,0 +1,66 @@
+@mixin set-theme-colors($theme)
+    --text-color: var(--#{$theme}-text)
+    --muted-color: var(--#{$theme}-muted)
+    --text-color-opposite: var(--#{$theme}-text-opp)
+    --bg-color: var(--#{$theme}-bg)
+    --surface-1: var(--#{$theme}-surface-1)
+    --surface-2: var(--#{$theme}-surface-2)
+    --surface-3: var(--#{$theme}-surface-3)
+    --surface-4: var(--#{$theme}-surface-4)
+    --border-color: var(--#{$theme}-border)
+    --border-color-sidenote: var(--#{$theme}-border-sidenote)
+    --mark-bg-color: var(--#{$theme}-mark-bg)
+    --blockquote-bg-color: var(--#{$theme}-blockquote-bg)
+
+:root
+    // Light theme colors
+    --light-text: var(--gray-8)
+    --light-muted: var(--gray-6)
+    --light-text-opp: var(--gray-1)
+    --light-bg: #fff
+    --light-surface-1: var(--gray-1)
+    --light-surface-2: var(--gray-2)
+    --light-surface-3: var(--gray-3)
+    --light-surface-4: var(--gray-4)
+    --light-border: var(--gray-3)
+    --light-border-sidenote: var(--gray-1)
+    --light-mark-bg: var(--blue-1)
+    --light-blockquote-bg: linear-gradient(135deg, #fff, #fafafb 75%, #fff)
+
+    // Dim theme colors
+    --dark-text: var(--gray-2)
+    --dark-muted: var(--gray-6)
+    --dark-text-opp: var(--gray-8)
+    --dark-bg: var(--gray-9)
+    --dark-surface-1: var(--gray-10)
+    --dark-surface-2: var(--gray-7)
+    --dark-surface-3: var(--gray-6)
+    --dark-surface-4: var(--gray-5)
+    --dark-border: var(--gray-7)
+    --dark-border-sidenote: var(--gray-7)
+    --dark-mark-bg: var(--blue-9)
+    --dark-blockquote-bg: linear-gradient(135deg, var(--gray-9), var(--gray-10) 75%, var(--gray-9))
+
+// Force theme based on HTML attribute
+html[color-scheme="dark"]
+    color-scheme: dark
+    +set-theme-colors("dark")
+
+html[color-scheme="light"]
+    color-scheme: light
+    +set-theme-colors("light")
+
+// If no explicit theme is set in HTML, follow system preferences
+html:not([color-scheme])
+    @media (prefers-color-scheme: dark)
+        color-scheme: dark
+        +set-theme-colors("dark")
+
+    @media (prefers-color-scheme: light)
+        color-scheme: light
+        +set-theme-colors("light")
+
+:root
+    --warning-content: "⚠️Warning!"
+html[lang="ua"]
+    --warning-content: "⚠️Обережно!"

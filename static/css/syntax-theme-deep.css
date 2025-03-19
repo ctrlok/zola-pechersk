@@ -1,0 +1,478 @@
+/*
+ * Syntax theme based on "Pechersk Deep Dark" IntelliJ Scheme
+ * Generated from XML definition
+ * Main Colors: Various shades derived from the scheme
+ */
+
+ :root {
+    /* Base Colors from TEXT attribute */
+    --foreground-code: #e9ecef;
+    --background-code: #212529;
+  
+    /* Extracted Colors from XML Attributes */
+    --pechersk-red: #FF2232;
+    --pechersk-pink-1: #CB487F; /* Keywords, Bash commands, CSS Ident, etc. */
+    --pechersk-purple: #705CA6; /* Constants, Function names (JS), CSS Class, Python Decorator, etc. */
+    --pechersk-blue-1: #3B66AE; /* Class names, Numbers (some), Operators, Annotations, CSS Hash, etc. */
+    --pechersk-cyan-1: #1097AE; /* Function decl, Numbers, Attributes, Links, CSS Operators, System Output */
+    --pechersk-cyan-2: #1B5262; /* Interface names, Bash Builtin Var, Log Debug */
+    --pechersk-gray-1: #868e96; /* Comments, Strings, Local Vars (Py/Default), Line numbers */
+    --pechersk-gray-2: #495057; /* Doc comments, Whitespaces, Right margin */
+    --pechersk-gray-3: #2B3137; /* Gutter background, Documentation background */
+    --pechersk-gray-4: #21212C; /* Caret row, Warning hint */
+    --pechersk-blue-2: #203A51; /* Added lines color, Breakpoint background */
+    --pechersk-white: #e9ecef; /* Default text, Numbers (some), Parameters (PHP), etc. */
+  
+    /* Specific Use Colors (might overlap) */
+    --pechersk-error: #FF2232;
+    --pechersk-deprecated: #e9ecef; /* Effect color */
+    --pechersk-todo: #868e96;
+    --pechersk-unused: #868e96;
+    --pechersk-diff-inserted: #203A51;
+    --pechersk-diff-deleted: #868e96; /* From DELETED_LINES_COLOR */
+    --pechersk-diff-modified: #3B66AE;
+    --pechersk-selection-bg: #3B66AE;
+    --pechersk-caret-row-bg: #21212C;
+    --pechersk-gutter-bg: #0d0f12;
+    --pechersk-visual-indent: #343a40;
+    --pechersk-indent-guide: #495057;
+    --pechersk-selected-indent-guide: #868e96;
+  }
+  
+  /* Base theme */
+  .z-code {
+    color: var(--foreground-code);
+    background-color: var(--background-code);
+    /* Consider adding font-family, font-size etc. here */
+  }
+  
+  /* General Text & Punctuation */
+  .z-punctuation,
+  .z-meta.z-brace { /* Default punctuation if not otherwise specified */
+    color: var(--pechersk-white); /* Often inherits foreground or specific colors */
+  }
+
+  .z-source {
+   margin-left: 0.5em; /* Add some space to the right */
+  }
+
+  .z-punctuation.z-definition.z-comment,
+  .z-comment {
+    color: var(--pechersk-gray-1);
+  }
+  
+  .z-punctuation.z-definition.z-string,
+  .z-punctuation.z-definition.z-variable,
+  .z-punctuation.z-definition.z-parameters,
+  .z-punctuation.z-definition.z-array,
+  .z-punctuation.z-section.z-embedded,
+  .z-variable.z-interpolation {
+     color: var(--pechersk-white); /* Often matches the element they define */
+  }
+  
+  .z-punctuation.z-terminator, /* Semicolons etc. */
+  .z-punctuation.z-separator,
+  .z-punctuation.z-accessor {
+    color: var(--pechersk-purple); /* From DEFAULT_SEMICOLON */
+  }
+  
+  /* Keywords & Storage */
+  .z-keyword,
+  .z-storage.z-type, /* class, function, var, let, const */
+  .z-storage.z-modifier { /* public, private, static */
+    color: var(--pechersk-pink-1);
+    font-weight: bold; /* Based on DEFAULT_KEYWORD FONT_TYPE=1 */
+  }
+  
+  .z-keyword.z-operator {
+    color: var(--pechersk-blue-1); /* DEFAULT_OPERATION_SIGN */
+  }
+  
+  .z-keyword.z-control { /* if, else, for, while, return */
+    color: var(--pechersk-pink-1);
+    font-weight: bold;
+  }
+  
+  .z-keyword.z-other.z-special-method { /* e.g., constructor */
+     color: var(--pechersk-pink-1); /* Often same as keyword */
+  }
+  
+  .z-keyword.z-other.z-unit { /* px, em, rem in CSS */
+    color: var(--pechersk-cyan-1); /* Often like numbers */
+  }
+  
+  .z-storage { /* Default storage if not more specific */
+    color: var(--pechersk-pink-1);
+  }
+  
+  /* Variables & Parameters */
+  .z-variable { /* Default variable - maybe reassigned local? */
+    color: var(--pechersk-purple); /* From DEFAULT_REASSIGNED_LOCAL_VARIABLE */
+  }
+  
+  .z-variable.z-language, /* this, super, self */
+  .z-variable.z-other.z-readwrite.z-instance {
+    color: var(--pechersk-pink-1); /* e.g., PHP_INSTANCE_FIELD */
+  }
+  
+  .z-variable.z-parameter {
+    color: var(--pechersk-white); /* e.g., PHP_PARAMETER or default text */
+    /* XML DEFAULT_LOCAL_VARIABLE was italic gray: #868e96 */
+    /* XML PY.SELF_PARAMETER was white: #e9ecef */
+  }
+  
+  .z-variable.z-other.z-constant {
+     color: var(--pechersk-purple); /* DEFAULT_CONSTANT */
+  }
+  
+  /* Functions & Methods */
+  .z-entity.z-name.z-function,
+  .z-support.z-function,
+  .z-meta.z-function-call .z-entity.z-name.z-function,
+  .z-support.z-function.z-any-method {
+    color: var(--pechersk-cyan-1); /* DEFAULT_FUNCTION_DECLARATION */
+  }
+  
+  /* JS/TS specific function/method examples */
+  .z-meta.z-method.z-declaration .z-entity.z-name.z-function, /* Method declaration name */
+  .z-support.z-function /* Built-in functions */ {
+      color: var(--pechersk-cyan-1);
+  }
+  .z-meta.z-function-call .z-variable.z-function /* Instance method call JS */ {
+      color: var(--pechersk-pink-1); /* From JS.INSTANCE_MEMBER_FUNCTION */
+  }
+  .z-meta.z-method.z-declaration .z-variable.z-object /* TS Instance method declaration? */ {
+       color: var(--pechersk-blue-1); /* From TS.INSTANCE_MEMBER_FUNCTION */
+  }
+  
+  /* Classes, Types, Interfaces */
+  .z-entity.z-name.z-class,
+  .z-entity.z-name.z-type.z-class,
+  .z-support.z-class {
+    color: var(--pechersk-blue-1); /* DEFAULT_CLASS_NAME */
+  }
+  
+  .z-entity.z-name.z-type, /* Type annotations */
+  .z-support.z-type {
+    color: var(--pechersk-pink-1); /* e.g. org.rust.PRIMITIVE_TYPE */
+  }
+  
+  .z-entity.z-other.z-inherited-class {
+    color: var(--pechersk-cyan-2); /* DEFAULT_INTERFACE_NAME */
+  }
+  
+  .z-meta.z-class .z-entity.z-name.z-class { /* Sometimes nested */
+    color: var(--pechersk-blue-1);
+  }
+  
+  /* Strings */
+  .z-string,
+  .z-string .z-source,
+  .z-string .z-meta.z-embedded.z-line {
+    color: var(--pechersk-gray-1); /* DEFAULT_STRING */
+  }
+  
+  .z-string .z-punctuation.z-definition.z-string {
+    color: var(--pechersk-gray-1); /* Match string color */
+  }
+  
+  .z-string.z-regexp {
+    color: var(--pechersk-gray-1); /* JS.REGEXP */
+  }
+  
+  .z-string.z-regexp .z-constant.z-character.z-escape,
+  .z-string .z-constant.z-character.z-escape {
+    color: var(--pechersk-cyan-1); /* DEFAULT_VALID_STRING_ESCAPE */
+  }
+  
+  .z-string.z-other.z-link {
+    color: var(--pechersk-cyan-1); /* CTRL_CLICKABLE, HYPERLINK_ATTRIBUTES */
+    text-decoration: underline; /* Common for links */
+  }
+  
+  /* Numbers & Constants */
+  .z-constant.z-numeric {
+    color: var(--pechersk-cyan-1); /* DEFAULT_NUMBER */
+  }
+  
+  .z-constant.z-language, /* true, false, null */
+  .z-constant.z-boolean {
+    color: var(--pechersk-blue-1); /* JSON.KEYWORD */
+    font-weight: bold; /* Often bold */
+  }
+  
+  .z-constant.z-symbol,
+  .z-constant.z-other.z-symbol {
+     color: var(--pechersk-purple); /* DEFAULT_CONSTANT */
+  }
+  
+  .z-constant { /* Default constant if not numeric/language */
+    color: var(--pechersk-purple); /* DEFAULT_CONSTANT */
+  }
+  
+  /* HTML & XML */
+  .z-entity.z-name.z-tag {
+    color: var(--pechersk-purple); /* HTML_TAG_NAME, XML_TAG_NAME */
+  }
+  
+  .z-punctuation.z-definition.z-tag {
+    color: var(--pechersk-purple); /* Match tag color */
+  }
+  
+  .z-entity.z-other.z-attribute-name {
+    color: var(--pechersk-cyan-1); /* DEFAULT_ATTRIBUTE */
+  }
+  
+  .z-entity.z-other.z-attribute-name.z-id {
+    color: var(--pechersk-cyan-1); /* Often styled like other attributes */
+  }
+  
+  .z-punctuation.z-definition.z-entity { /* &amp; */
+    color: var(--pechersk-pink-1); /* Often keyword color */
+  }
+  
+  /* CSS */
+  .z-meta.z-selector .z-entity.z-name.z-tag, /* Element selector */
+  .z-meta.z-selector .z-entity.z-other.z-attribute-name.z-class { /* Class selector */
+    color: var(--pechersk-purple); /* CSS.CLASS_NAME */
+  }
+  
+  .z-meta.z-selector .z-entity.z-other.z-attribute-name.z-id { /* ID selector */
+    color: var(--pechersk-cyan-1); /* CSS.HASH */
+  }
+  
+  .z-meta.z-selector .z-entity.z-other.z-attribute-name.z-pseudo-class, /* :hover */
+  .z-meta.z-selector .z-entity.z-other.z-attribute-name.z-pseudo-element /* ::before */ {
+    color: var(--pechersk-cyan-1); /* CSS.PSEUDO */
+  }
+  
+  .z-support.z-type.z-property-name {
+    color: var(--pechersk-pink-1); /* CSS.IDENT (property name) */
+  }
+  
+  .z-support.z-constant.z-property-value,
+  .z-constant.z-other.z-color,
+  .z-constant.z-numeric.z-css {
+    color: var(--pechersk-white); /* CSS.PROPERTY_VALUE */
+  }
+  
+  .z-support.z-function.z-misc /* url(), rgb() etc */ {
+      color: var(--pechersk-purple); /* CSS.FUNCTION */
+  }
+  
+  .z-keyword.z-other.z-unit {
+      color: var(--pechersk-cyan-1); /* Like numbers */
+  }
+  
+  /* Markdown */
+  .z-markup.z-heading,
+  .z-markup.z-heading .z-entity.z-name.z-section {
+    color: var(--pechersk-purple); /* Often stands out */
+    font-weight: bold;
+  }
+  
+  .z-markup.z-heading .z-punctuation.z-definition.z-heading {
+    color: var(--pechersk-purple);
+    font-weight: bold;
+  }
+  
+  .z-markup.z-bold {
+    color: var(--pechersk-white); /* MARKDOWN_BOLD */
+    font-weight: bold;
+  }
+  .z-punctuation.z-definition.z-bold {
+     color: var(--pechersk-pink-1); /* MARKDOWN_ITALIC_MARKER used as proxy */
+     font-weight: bold;
+  }
+  
+  
+  .z-markup.z-italic {
+    color: var(--pechersk-pink-1); /* MARKDOWN_ITALIC_MARKER text */
+    font-style: italic;
+  }
+  .z-punctuation.z-definition.z-italic {
+    color: var(--pechersk-pink-1); /* MARKDOWN_ITALIC_MARKER */
+    font-style: italic;
+  }
+  
+  
+  .z-markup.z-raw.z-inline,
+  .z-markup.z-raw.z-block {
+    color: var(--pechersk-gray-1); /* Often like strings or comments */
+  }
+  
+  .z-markup.z-list .z-punctuation.z-definition.z-list_item {
+    color: var(--pechersk-pink-1); /* Often keyword-like */
+  }
+  
+  .z-markup.z-quote {
+    color: var(--pechersk-cyan-1);
+    font-style: italic;
+  }
+  
+  .z-meta.z-link .z-entity.z-name,
+  .z-string.z-other.z-link.z-title {
+    color: var(--pechersk-cyan-1);
+  }
+  
+  /* Meta & Other */
+  .z-meta.z-tag, /* Often used for XML/HTML structure */
+  .z-meta.z-selector,
+  .z-meta.z-property-list {
+    /* Usually inherits from children */
+  }
+  
+  .z-meta.z-require,
+  .z-meta.z-import {
+    color: var(--pechersk-pink-1); /* Like keywords */
+  }
+  
+  .z-meta.z-preprocessor,
+  .z-meta.z-pragma {
+      color: var(--pechersk-gray-1); /* Often like comments */
+  }
+  
+  .z-meta.z-annotation .z-entity.z-name.z-type, /* Java annotations */
+  .z-meta.z-decorator .z-entity.z-name.z-function /* Python/JS decorators */{
+      color: var(--pechersk-blue-1); /* ANNOTATION_NAME_ATTRIBUTES */
+  }
+  .z-meta.z-decorator .z-punctuation.z-decorator {
+      color: var(--pechersk-blue-1);
+  }
+  
+  
+  .z-support.z-constant { /* Built-in constants */
+    color: var(--pechersk-purple);
+  }
+  
+  .z-support.z-type.z-primitive {
+     color: var(--pechersk-pink-1); /* e.g. org.rust.PRIMITIVE_TYPE */
+  }
+  
+  
+  /* Invalid & Deprecated */
+  .z-invalid.z-illegal {
+    color: var(--pechersk-white); /* Or a specific bright color */
+    background-color: var(--pechersk-red);
+    font-weight: bold;
+  }
+  
+  .z-invalid.z-deprecated {
+    text-decoration: line-through;
+    color: var(--pechersk-deprecated);
+    /* Effect color was #e9ecef, effect type 3 (strikeout) */
+  }
+  
+  /* Diff */
+  .z-markup.z-inserted,
+  .z-markup.z-inserted.z-git_gutter {
+    color: var(--pechersk-blue-2); /* Use ADDED_LINES_COLOR */
+    /* background-color: var(--pechersk-diff-inserted); Diff Inserted Background */
+  }
+  
+  .z-markup.z-deleted,
+  .z-markup.z-deleted.z-git_gutter {
+    color: var(--pechersk-diff-deleted); /* DELETED_LINES_COLOR */
+    /* background-color: var(--pechersk-diff-deleted-bg); If defined */
+  }
+  
+  .z-markup.z-changed,
+  .z-markup.z-changed.z-git_gutter {
+    color: var(--pechersk-diff-modified); /* MODIFIED_LINES_COLOR */
+   /* background-color: var(--pechersk-diff-modified-bg); If defined */
+  }
+  
+  .z-markup.z-ignored,
+  .z-markup.z-untracked {
+    color: var(--pechersk-gray-2); /* Often subdued */
+  }
+  
+  /* Placeholders for things not explicitly in example CSS structure but in XML */
+  .z-entity.z-name.z-namespace {
+      color: var(--pechersk-cyan-1); /* Like types/classes */
+  }
+  
+  .z-variable.z-other.z-property {
+      color: var(--pechersk-white); /* Default property access */
+  }
+  
+  .z-constant.z-character {
+      color: var(--pechersk-gray-1); /* Like strings */
+  }
+  
+  /* TODO/FIXME */
+  .z-comment.z-line.z-double-slash .z-storage.z-type.z-class, /* Highlighting TODO in comments */
+  .z-comment.z-block.z-documentation .z-storage.z-type.z-class {
+      color: var(--pechersk-todo);
+      font-weight: bold; /* Often highlighted */
+  }
+  
+  /* JSON specific */
+  .z-meta.z-structure.z-dictionary.z-json .z-string.z-quoted.z-double.z-key {
+      color: var(--pechersk-white); /* JSON.PROPERTY_KEY */
+  }
+  .z-meta.z-structure.z-dictionary.z-value.z-json .z-string.z-quoted.z-double,
+  .z-meta.z-structure.z-array.z-json .z-string.z-quoted.z-double {
+      color: var(--pechersk-gray-1); /* Default string color */
+  }
+  .z-meta.z-structure.z-dictionary.z-value.z-json .z-constant.z-numeric,
+  .z-meta.z-structure.z-array.z-json .z-constant.z-numeric {
+      color: var(--pechersk-cyan-1); /* Default number color */
+  }
+  .z-meta.z-structure.z-dictionary.z-value.z-json .z-constant.z-language, /* true/false/null in JSON */
+  .z-meta.z-structure.z-array.z-json .z-constant.z-language {
+      color: var(--pechersk-blue-1); /* JSON.KEYWORD */
+  }
+  
+  /* YAML specific */
+  .z-entity.z-name.z-tag.z-yaml { /* YAML tags !<...> */
+      color: var(--pechersk-cyan-1);
+  }
+  .z-string.z-unquoted.z-key.z-yaml { /* YAML keys */
+      color: var(--pechersk-cyan-1); /* YAML_SCALAR_KEY */
+  }
+  .z-string.z-unquoted.z-block.z-yaml,
+  .z-string.z-quoted.z-double.z-yaml,
+  .z-string.z-quoted.z-single.z-yaml { /* YAML string values */
+      color: var(--pechersk-purple); /* YAML_SCALAR_VALUE */
+  }
+  .z-variable.z-other.z-alias.z-yaml { /* YAML anchor/alias */
+      color: var(--pechersk-blue-1); /* YAML_ANCHOR */
+  }
+
+  /* Styling for the line number column (first TD in each TR) */
+.z-code code table tbody tr td:first-child {
+    background-color: var(--pechersk-gray-3); /* Corresponds to EDITOR_GUTTER_BACKGROUND #2B3137 */
+    color: var(--pechersk-gray-1);           /* Corresponds to LINE_NUMBERS_COLOR #868e96 */
+    padding-right: 1em;                     /* Add some space between number and code */
+    text-align: right;                      /* Right-align the numbers */
+    user-select: none;                      /* Prevent selection of line numbers */
+    -webkit-user-select: none;              /* For Safari */
+    -moz-user-select: none;                 /* For Firefox */
+  }
+  
+  /* Optional: Ensure table layout fits well */
+  .z-code code table {
+    border-collapse: collapse; /* Removes space between table cells */
+    width: 100%;             /* Make table take full width */
+  }
+  
+  .z-code code table tbody tr td {
+     vertical-align: top; /* Align content to the top of the cell */
+     padding-left: 0.5em; /* Add some padding to the code cell too */
+  }
+  
+  /* Reset padding for the line number cell if needed, or rely on first-child rule */
+  .z-code code table tbody tr td:first-child {
+     padding-left: 1em; /* Remove left padding */
+     padding-right: 1em; /* Keep right padding */
+  }
+  
+  /* Ensure the main pre/code containers handle overflow */
+  .z-code {
+    overflow-x: auto; /* Add horizontal scroll if needed */
+    padding: 0; /* Remove default padding if table handles it */
+  }
+  .z-code code {
+     display: block; /* Ensure code block behaves as expected */
+  }

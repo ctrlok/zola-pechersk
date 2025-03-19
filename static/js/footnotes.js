@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Check viewport width - only run once on page load as requested
-  const isMobileView = window.matchMedia('(max-width: 1200px)').matches;
+  const isMobileView = window.matchMedia('(max-width: 768px)').matches;
   
   // Function to place footnotes correctly based on viewport
   function placeFootnotes() {
@@ -59,5 +59,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Run once on page load with a small delay to ensure DOM is ready
-  setTimeout(placeFootnotes, 100);
+  setTimeout(placeFootnotes, 50);
 }); 

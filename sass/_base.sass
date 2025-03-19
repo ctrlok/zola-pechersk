@@ -1,0 +1,142 @@
+@use 'variables' as *
+@use 'themes' as *
+
+:root
+  --base-font: var(--font-system-ui), ui-serif
+  --code-font: var(--font-monospace-code), monospace
+
+body
+    font-family: var(--base-font)
+    font-size: var(--font-size-1)
+    line-height: var(--font-lineheight-3)
+    color: var(--text-color)
+    background-color: var(--bg-color)
+
+.container
+    max-width: $page-max-width
+    margin: 0 auto
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+
+
+header
+  text-align: left
+  font-size: var(--font-size-1)
+  margin-top: var(--size-fluid-1)
+  display: flex
+  justify-content: space-between
+  align-items: center
+  :link
+    text-decoration: none
+    color: var(--gray-5)
+    cursor: pointer
+    position: relative
+    font-weight: var(--font-weight-3)
+
+  a
+    &:hover
+      text-decoration: none
+
+    &:visited
+      color: var(--gray-6)
+
+main
+    flex: 1
+    display: flex
+
+article
+    flex: 1
+    max-width: $content-max-width
+    margin: 0 auto
+
+footer
+  text-align: center
+  padding: var(--size-fluid-3) 0
+  margin-top: var(--size-fluid-3)
+  border-top: var(--border-size-1) solid var(--border-color)
+  color: var(--muted-color)
+
+
+// Media queries for tablets (max-width: 768px)
+@media screen and (max-width: 768px)
+    .container
+        max-width: 90% // Example override for tablet screens
+        padding: var(--size-fluid-1)
+
+    article
+        max-width: 100%
+
+// Media queries for phones (max-width: 480px)
+@media screen and (max-width: 480px)
+    .container
+        max-width: 100%
+        padding: var(--size-fluid-1)
+
+    header
+        flex-direction: column
+        align-items: flex-start
+
+    main
+        flex-direction: column
+
+img
+  max-width: 100%
+  height: auto
+
+.wide
+  width: $page-max-width
+  display: block
+  margin-left: 50%
+  transform: translateX(-50%)
+
+mark
+  color: var(--text-color)
+  background: var(--mark-bg-color)
+  padding: 0.1em 0.1em
+  position: relative
+  z-index: 1
+
+// Code styles
+pre
+  background-color: var(--surface-2)
+  padding: var(--size-fluid-2)
+  border-radius: var(--radius-2)
+  overflow-x: auto
+  margin: var(--size-fluid-3) 0
+  box-shadow: var(--shadow-5)
+
+code
+  font-family: var(--code-font), monospace
+  background-color: var(--surface-1)
+  padding: var(--size-1) var(--size-2)
+  border-radius: var(--radius-2)
+  font-size: var(--font-size-1)
+
+pre code
+  background-color: transparent
+  padding: 0
+
+
+a
+    color: var(--text-color)
+    text-decoration: none
+    cursor: pointer
+    position: relative
+
+    &:hover
+        text-decoration: underline
+
+    &:visited
+        color: var(--text-color)
+
+    &::after
+        content: ''
+        display: block
+        width: 100%
+        height: var(--size-1)
+        background-color: var(--bg-color)
+        position: absolute
+        top: 0
+        left: 0
+        z-index: -1
