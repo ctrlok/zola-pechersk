@@ -1,2 +1,7 @@
 .jj/
 public/
+/public/
+.DS_Store
+.idea/
+.vscode/
+static/oldcss

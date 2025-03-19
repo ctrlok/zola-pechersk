@@ -7,6 +7,8 @@ description = "A demonstration of HTML elements commonly found in Markdown"
 This is a zola template with <mark>support</mark> of all ~~common~~ ^Markdown^ ~elements~ and 
 sidenotes [^1 left]. 
 
+
+
 ### header
 
 [^1 left]: This is a sidenote

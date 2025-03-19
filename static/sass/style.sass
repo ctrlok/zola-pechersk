@@ -1,0 +1,63 @@
+@import url("../css/open-props.css")
+@import url("../css/flavors.css")
+@import url("../css/menu.css")
+
+:root
+  --page-max-width: calc(var(--size-lg) + var(--size-13) + var(--size-fluid-2) + 6px)
+  --content-max-width: var(--size-md)
+
+:root,
+.light-theme
+  color-scheme: light
+  --text-color: var(--gray-8)
+  --bg-color: #fff
+  --surface-1: #fff
+  --surface-2: var(--gray-1)
+  --surface-3: var(--gray-2)
+  --surface-4: var(--gray-3)
+  --border-color: var(--gray-3)
+  --muted-color: var(--gray-6)
+  --tip-color: var(--cyan-0)
+  --important-color: var(--blue-1)
+  --warning-color: var(--yellow-3)
+  --caution-color: var(--red-7)
+
+.dark-theme
+  color-scheme: dark
+  --text-color: var(--gray-2)
+  --bg-color: var(--surface-1)
+  --surface-1: var(--gray-7)
+  --surface-2: var(--gray-8)
+  --surface-3: var(--gray-7)
+  --surface-4: var(--gray-6)
+  --border-color: var(--gray-7)
+  --muted-color: var(--gray-5)
+  --tip-color: var(--green-7)
+  --important-color: var(--blue-7)
+  --warning-color: var(--yellow-7)
+  --caution-color: var(--red-7)
+
+@media (prefers-color-scheme: dark)
+  :root:not(.light-theme):not([data-theme="light"])
+    color-scheme: dark
+    --text-color: var(--gray-2)
+    --bg-color: var(--surface-1)
+    --surface-1: var(--gray-7)
+    --surface-2: var(--gray-8)
+    --surface-3: var(--gray-7)
+    --surface-4: var(--gray-6)
+    --shadow-color: var(--gray-0)
+    --border-color: var(--gray-8)
+    --muted-color: var(--gray-5)
+
+@media (prefers-color-scheme: light)
+  :root:not(.dark-theme):not([data-theme="dark"])
+    color-scheme: light
+    --text-color: var(--gray-8)
+    --bg-color: #fff
+    --surface-1: #fff
+    --surface-2: var(--gray-0)
+    --surface-3: var(--gray-3)
+    --surface-4: var(--gray-5)
+    --border-color: var(--gray-3)
+    --muted-color: var(--gray-6)
