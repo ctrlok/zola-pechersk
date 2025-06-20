@@ -4,6 +4,11 @@
 :root
   --base-font: var(--font-system-ui), ui-serif
   --code-font: var(--font-monospace-code), monospace
+  // Grid layout custom properties for sidenotes
+  --sidenote-width: #{grid-layout(sidenote-width)}
+  --sidenote-gap: #{grid-layout(sidenote-gap)}
+  --content-width: #{grid-layout(content-width)}
+  --grid-total-width: calc(var(--sidenote-width) + var(--sidenote-gap) + var(--content-width) + var(--sidenote-gap) + var(--sidenote-width))
 
 body
     font-family: var(--base-font)
@@ -13,12 +18,11 @@ body
     background-color: var(--bg-color)
 
 .container
-    max-width: $page-max-width
+    max-width: var(--grid-total-width)
     margin: 0 auto
     display: flex
     flex-direction: column
     min-height: 100vh
-
 
 header
   text-align: left
@@ -41,14 +45,27 @@ header
     &:visited
       color: var(--gray-6)
 
+// Main content area with CSS Grid for sidenotes
 main
     flex: 1
-    display: flex
+    display: grid
+    grid-template-columns: var(--sidenote-width) var(--sidenote-gap) var(--content-width) var(--sidenote-gap) var(--sidenote-width)
+    grid-template-areas: "sidenote-left gap-left content gap-right sidenote-right"
+    justify-content: center
+    align-items: start
+    gap: 0
+    width: 100%
+    position: relative
 
+// Article takes the center grid area
 article
-    flex: 1
-    max-width: $content-max-width
-    margin: 0 auto
+    grid-area: content
+    width: 100%
+    max-width: var(--content-width)
+    position: relative // Enable absolute positioning for sidenotes
+
+// Sidenote containers (using absolute positioning, not grid areas)
+// Grid areas reserved for potential future enhancements
 
 footer
   text-align: center
@@ -57,38 +74,53 @@ footer
   border-top: var(--border-size-1) solid var(--border-color)
   color: var(--muted-color)
 
+// Container queries for modern responsive design
+@container (max-width: breakpoint(xl))
+  :root
+    --sidenote-width: var(--size-12)
+    --sidenote-gap: var(--size-4)
 
-// Media queries for tablets
-@media screen and (max-width: breakpoint(md))
-    .container
-        max-width: $container-max-width-tablet
-        padding: var(--size-fluid-1)
+// Media queries for responsive fallbacks
+@media screen and (max-width: breakpoint(xl))
+  :root
+    --sidenote-width: var(--size-12)
+    --sidenote-gap: var(--size-4)
+    --grid-total-width: calc(var(--size-12) + var(--size-4) + var(--size-md) + var(--size-4) + var(--size-12))
 
-    article
-        max-width: 100%
+@media screen and (max-width: breakpoint(lg))
+  main
+    display: block // Fallback to normal flow on smaller screens
+    
+  .container
+    max-width: $container-max-width-tablet
+    padding: var(--size-fluid-1)
 
-// Media queries for phones
+  article
+    max-width: 100%
+    grid-area: unset
+
 @media screen and (max-width: breakpoint(sm))
-    .container
-        max-width: $container-max-width-phone
-        padding: var(--size-fluid-1)
+  .container
+    max-width: $container-max-width-phone
+    padding: var(--size-fluid-1)
 
-    header
-        flex-direction: column
-        align-items: flex-start
+  header
+    flex-direction: column
+    align-items: flex-start
 
-    main
-        flex-direction: column
+  main
+    display: block
 
 img
   max-width: 100%
   height: auto
 
 .wide
-  width: $page-max-width
+  width: var(--grid-total-width)
   display: block
   margin-left: 50%
   transform: translateX(-50%)
+  grid-column: 1 / -1 // Span all grid columns
 
 mark
   color: var(--text-color)
@@ -151,25 +183,8 @@ pre code
   &:focus
     top: 6px
 
-//a
-//    color: var(--text-color)
-//    text-decoration: none
-//    cursor: pointer
-//    //position: relative
-//
-//    &:hover
-//        text-decoration: underline
-//
-//    &:visited
-//        color: var(--text-color)
-//
-//    //&::after
-//    //    content: ''
-//    //    display: block
-//    //    width: 100%
-//    //    height: var(--size-1)
-//    //    background-color: var(--bg-color)
-//    //    position: absolute
-//    //    top: 0
-//    //    left: 0
-//    //    z-index: -1
+// Container query support detection
+@supports (container-type: inline-size)
+  .container
+    container-type: inline-size
+    container-name: main-container

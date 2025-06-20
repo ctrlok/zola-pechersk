@@ -2,6 +2,9 @@
 $page-max-width: calc(var(--size-lg) + var(--size-13) + var(--size-fluid-2) + 6px)
 $content-max-width: var(--size-md)
 
+// CSS Grid Layout for Sidenotes
+$grid-layout: (sidenote-width: var(--size-13), sidenote-gap: var(--size-fluid-2), content-width: var(--size-md))
+
 // Breakpoint map for consistent responsive design
 $breakpoints: (xs: 320px, sm: 480px, md: 768px, lg: 1024px, xl: 1290px, xxl: 1440px)
 
@@ -109,6 +112,10 @@ $font-weights: (normal-flavor: var(--font-weight-4), headers-only: var(--font-we
 $font-weight-normal-flavor: map-get($font-weights, normal-flavor)
 $font-weight-headers-only: map-get($font-weights, headers-only)
 
+// Footnote mobile design colors
+$footnote-accent-color: var(--blue-6)
+$footnote-accent-secondary: var(--cyan-6)
+
 // Accessibility settings
 $focus-ring-width: 2px
 $focus-ring-color: var(--blue-6)
@@ -129,3 +136,6 @@ $reduced-motion-duration: 0.01s
 
 @function easing($type)
   @return map-get($easings, $type)
+
+@function grid-layout($property)
+  @return map-get($grid-layout, $property)
