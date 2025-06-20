@@ -1,14 +1,13 @@
 @use 'variables' as *
 @use 'themes' as *
-@use 'flavour' as *
 
 @keyframes folded-pulse
   0%
-    opacity: 0.7
-    transform: scaleX(0.98)
+    opacity: $pulse-opacity-min
+    transform: scaleX($folded-pulse-scale)
   100%
-    opacity: 1
-    transform: scaleX(1)
+    opacity: $pulse-opacity-max
+    transform: scaleX($pulse-scale-max)
 
 .folded
   position: relative
@@ -18,7 +17,7 @@
   background-color: var(--surface-1)
   box-shadow: var(--shadow-3)
   backdrop-filter: blur(4px)
-  transition: transform 0.2s ease, box-shadow 0.2s ease
+  transition: transform $animation-duration-fast $animation-easing-default, box-shadow $animation-duration-fast $animation-easing-default
 
   // Modern accent element
   &:before
@@ -27,28 +26,28 @@
     left: 0
     top: 0
     bottom: 0
-    width: var(--border-size-2)
+    width: $alert-accent-width
     background-color: var(--accent-color, var(--surface-1))
     box-shadow: var(--shadow-3)
-    z-index: 2
-    animation: folded-pulse 3s infinite alternate
+    z-index: $z-accent-bar
+    animation: folded-pulse $animation-duration-pulse infinite alternate
 
   // Subtle glow effect
   &:after
     content: ""
     position: absolute
-    left: var(--border-size-2)
+    left: $alert-accent-width
     top: 0
     bottom: 0
-    width: var(--size-3)
-    z-index: 1
+    width: $alert-glow-width
+    z-index: $z-glow-effect
     pointer-events: none
     backdrop-filter: blur(2px)
-    opacity: 0.6
-    background: linear-gradient(90deg, var(--accent-color-transparent, rgba(var(--surface-3-rgb), 0.3)), transparent)
+    opacity: $backdrop-opacity
+    background: linear-gradient(90deg, var(--accent-color-transparent, rgba(var(--surface-3-rgb), $accent-opacity)), transparent)
 
   &:hover
-    transform: translateY(-2px)
+    transform: translateY($folded-transform-hover)
     box-shadow: var(--shadow-4)
 
   .folded-header
@@ -61,14 +60,14 @@
     color: var(--text-color)
     user-select: none
     position: relative
-    z-index: 3
-    transition: background-color 0.2s ease
+    z-index: $z-folded-header
+    transition: background-color $animation-duration-fast $animation-easing-default
 
     &:hover
       background-color: var(--surface-2)
 
     .folded-arrow
-      transition: transform 0.3s ease
+      transition: transform $animation-duration-medium $animation-easing-default
       font-size: var(--font-size-2)
       display: inline-block
       margin-left: var(--size-3)
@@ -77,11 +76,11 @@
   .folded-content
     max-height: 0
     overflow: hidden
-    transition: max-height 0.4s ease-in-out, padding 0.3s ease
+    transition: max-height $animation-duration-slow $animation-easing-in-out, padding $animation-duration-medium $animation-easing-default
     padding: 0 var(--size-6) 0 var(--size-6)
     opacity: 0
-    transform: translateY(-10px)
-    transition: max-height 0.4s ease-in-out, padding 0.3s ease, opacity 0.3s ease, transform 0.3s ease
+    transform: translateY($folded-transform-offset)
+    transition: max-height $animation-duration-slow $animation-easing-in-out, padding $animation-duration-medium $animation-easing-default, opacity $animation-duration-medium $animation-easing-default, transform $animation-duration-medium $animation-easing-default
     background-color: var(--surface-1)
 
     p:first-child
@@ -95,7 +94,7 @@
       transform: rotate(180deg)
 
     .folded-content
-      max-height: 2000px
+      max-height: $folded-max-height
       padding: var(--size-3) var(--size-6) var(--size-4) var(--size-6)
       opacity: 1
       transform: translateY(0)
@@ -133,7 +132,7 @@
     color: var(--accent)
 
 // Media queries for responsive design
-@media screen and (max-width: 768px)
+@media screen and (max-width: $breakpoint-tablet)
   .folded
     margin: var(--size-fluid-2) 0
 

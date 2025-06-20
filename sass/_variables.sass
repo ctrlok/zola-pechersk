@@ -1,3 +1,131 @@
 // Layout
 $page-max-width: calc(var(--size-lg) + var(--size-13) + var(--size-fluid-2) + 6px)
 $content-max-width: var(--size-md)
+
+// Breakpoint map for consistent responsive design
+$breakpoints: (xs: 320px, sm: 480px, md: 768px, lg: 1024px, xl: 1290px, xxl: 1440px)
+
+// Legacy breakpoint variables (for backwards compatibility)
+$breakpoint-tablet: map-get($breakpoints, md)
+$breakpoint-phone: map-get($breakpoints, sm)
+$breakpoint-footnote-large: map-get($breakpoints, xl)
+$breakpoint-footnote-small: 1100px
+
+// Z-index map for layering system
+$z-layers: (footnote: var(--layer-1), accent-bar: 2, glow-effect: 1, folded-header: 3, modal: 100, dropdown: 50)
+
+// Z-index variables (for backwards compatibility)
+$z-footnote: map-get($z-layers, footnote)
+$z-accent-bar: map-get($z-layers, accent-bar)
+$z-glow-effect: map-get($z-layers, glow-effect)
+$z-folded-header: map-get($z-layers, folded-header)
+
+// Animation duration map
+$durations: (fast: 0.2s, medium: 0.3s, slow: 0.4s, pulse: 3s)
+
+// Animation easing map
+$easings: (default: ease, in-out: ease-in-out, out: ease-out, bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55))
+
+// Animation variables (for backwards compatibility)
+$animation-duration-fast: map-get($durations, fast)
+$animation-duration-medium: map-get($durations, medium)
+$animation-duration-slow: map-get($durations, slow)
+$animation-duration-pulse: map-get($durations, pulse)
+$animation-easing-default: map-get($easings, default)
+$animation-easing-in-out: map-get($easings, in-out)
+$animation-easing-out: map-get($easings, out)
+
+// Footnote configuration map (excluding width/margin which must be CSS custom properties)
+$footnote-config: (width-mobile: 97%, label-offset: -0.7rem, label-offset-mobile: -0.9rem, label-left-offset: -0.01rem, label-left-offset-mobile: -0.3rem)
+
+// Footnote variables
+$footnote-width-mobile: map-get($footnote-config, width-mobile)
+$footnote-label-offset: map-get($footnote-config, label-offset)
+$footnote-label-offset-mobile: map-get($footnote-config, label-offset-mobile)
+$footnote-label-left-offset: map-get($footnote-config, label-left-offset)
+$footnote-label-left-offset-mobile: map-get($footnote-config, label-left-offset-mobile)
+
+// Folded content configuration
+$folded-config: (max-height: 2000px, transform-offset: -10px, transform-hover: -2px)
+
+$folded-max-height: map-get($folded-config, max-height)
+$folded-transform-offset: map-get($folded-config, transform-offset)
+$folded-transform-hover: map-get($folded-config, transform-hover)
+
+// Opacity values map
+$opacities: (backdrop: 0.6, accent: 0.3, pulse-min: 0.7, pulse-max: 1, happy-primary: 0.76, happy-secondary: 0.71)
+
+$backdrop-opacity: map-get($opacities, backdrop)
+$accent-opacity: map-get($opacities, accent)
+$pulse-opacity-min: map-get($opacities, pulse-min)
+$pulse-opacity-max: map-get($opacities, pulse-max)
+$happy-color-opacity: map-get($opacities, happy-primary)
+$happy-color-opacity-alt: map-get($opacities, happy-secondary)
+
+// Transform scale values map
+$scales: (pulse-min: 0.98, pulse-max: 1, folded-pulse: 0.98)
+
+$pulse-scale-min: map-get($scales, pulse-min)
+$pulse-scale-max: map-get($scales, pulse-max)
+$folded-pulse-scale: map-get($scales, folded-pulse)
+
+// Theme accent colors
+$happy-accents: (accent-1: rgb(255, 99, 202), accent-2: rgb(0, 159, 255), accent-3: rgb(18, 207, 227), accent-4: rgb(10, 135, 211))
+
+$happy-accent-1: map-get($happy-accents, accent-1)
+$happy-accent-2: map-get($happy-accents, accent-2)
+$happy-accent-3: map-get($happy-accents, accent-3)
+$happy-accent-4: map-get($happy-accents, accent-4)
+
+$deep-accents: (accent-1: var(--pink-7), accent-2: var(--blue-7), accent-3: var(--cyan-7), accent-4: var(--blue-8))
+
+$deep-accent-1: map-get($deep-accents, accent-1)
+$deep-accent-2: map-get($deep-accents, accent-2)
+$deep-accent-3: map-get($deep-accents, accent-3)
+$deep-accent-4: map-get($deep-accents, accent-4)
+
+// Gradient stop percentages
+$gradient-stops: (stop-1: 75%, stop-2: 110%, stop-3: 120%)
+
+$gradient-stop-1: map-get($gradient-stops, stop-1)
+$gradient-stop-2: map-get($gradient-stops, stop-2)
+$gradient-stop-3: map-get($gradient-stops, stop-3)
+
+// Responsive container max-widths
+$container-widths: (tablet: 90%, phone: 100%)
+
+$container-max-width-tablet: map-get($container-widths, tablet)
+$container-max-width-phone: map-get($container-widths, phone)
+
+// Alert box positioning
+$alert-dimensions: (glow-width: var(--size-3), accent-width: var(--border-size-2))
+
+$alert-glow-width: map-get($alert-dimensions, glow-width)
+$alert-accent-width: map-get($alert-dimensions, accent-width)
+
+// Font weight mappings
+$font-weights: (normal-flavor: var(--font-weight-4), headers-only: var(--font-weight-5))
+
+$font-weight-normal-flavor: map-get($font-weights, normal-flavor)
+$font-weight-headers-only: map-get($font-weights, headers-only)
+
+// Accessibility settings
+$focus-ring-width: 2px
+$focus-ring-color: var(--blue-6)
+$focus-ring-offset: 2px
+
+// Reduced motion support
+$reduced-motion-duration: 0.01s
+
+// Helper functions
+@function breakpoint($size)
+  @return map-get($breakpoints, $size)
+
+@function z-layer($layer)
+  @return map-get($z-layers, $layer)
+
+@function duration($speed)
+  @return map-get($durations, $speed)
+
+@function easing($type)
+  @return map-get($easings, $type)

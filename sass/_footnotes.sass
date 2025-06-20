@@ -7,7 +7,7 @@
 
 .footnote-definition
   width: var(--footnote-width)
-  z-index: var(--layer-1)
+  z-index: $z-footnote
   margin-top: 1px
   //margin-bottom: var(--size-3)
   position: relative
@@ -17,7 +17,7 @@
   border-left: 0.5px solid var(--border-color-sidenote)
   padding-left: var(--size-3)
   padding-right: 0
-  transition: margin-right 0.3s ease-out, width 0.3s ease-out
+  transition: margin-right $animation-duration-medium $animation-easing-out, width $animation-duration-medium $animation-easing-out
   
   *
     color: var(--muted-color)
@@ -47,9 +47,9 @@
     color: var(--muted-color)
     line-height: var(--font-lineheight-1)
     display: none
-    margin-left: -0.7rem
+    margin-left: $footnote-label-offset
     position: relative
-    left: -0.01rem
+    left: $footnote-label-left-offset
 
   &[id*="left"]
     float: left
@@ -62,7 +62,7 @@
     padding-right: var(--size-2)
     
     sup.footnote-definition-label
-      left: -0.01rem
+      left: $footnote-label-left-offset
 
 // Styles for clickable footnote references
 sup.footnote-reference
@@ -70,7 +70,7 @@ sup.footnote-reference
   line-height: var(--font-lineheight-1)
   color: var(--muted-color)
   position: relative
-  left: -0.01rem
+  left: $footnote-label-left-offset
   margin-left: -2px
   :link
     text-decoration: none
@@ -85,16 +85,16 @@ sup.footnote-reference
     color: var(--text-color)
 
 // Responsive footnote sizes
-@media (max-width: 1290px)
+@media (max-width: $breakpoint-footnote-large)
   :root
     --footnote-width: var(--size-12)
     --footnote-margin: var(--size-4)
 
 // Responsive styles for smaller screens
-@media (max-width: 1100px)
+@media (max-width: $breakpoint-footnote-small)
   .footnote-definition
     float: none
-    width: 97%
+    width: $footnote-width-mobile
     padding-left: var(--size-2)
     padding-right: 0
     border-left: none
@@ -117,15 +117,15 @@ sup.footnote-reference
       border-right: none
 
       sup.footnote-definition-label
-        margin-left: -0.9rem
+        margin-left: $footnote-label-offset-mobile
         position: relative
-        left: -0.3rem
+        left: $footnote-label-left-offset-mobile
 
     .footnote-definition-label + p
       width: calc(100% - var(--size-1))
 
     sup.footnote-definition-label
-      margin-left: -0.9rem
+      margin-left: $footnote-label-offset-mobile
       position: relative
-      left: -0.3rem
+      left: $footnote-label-left-offset-mobile
   // other overrides

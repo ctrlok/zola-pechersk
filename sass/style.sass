@@ -1,4 +1,5 @@
 
+// Internal SASS modules (using @use for better dependency management)
 @use 'variables' as *
 @use 'themes'
 @use 'typography'
@@ -8,6 +9,7 @@
 @use 'quote'
 @use 'folded'
 
+// External CSS imports (must use @import for external URLs)
 @import url("/css/open-props.css")
 @import url("/css/syntax-theme-deep.css")
 

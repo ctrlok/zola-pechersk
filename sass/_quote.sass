@@ -1,4 +1,6 @@
 
+@use 'variables' as *
+
 @mixin alertBox()
   position: relative
   padding: var(--size-4) var(--size-4) var(--size-4) var(--size-6)
@@ -8,7 +10,7 @@
   overflow: hidden
   box-shadow: var(--shadow-6)
   backdrop-filter: blur(4px)
-  transition: transform 0.2s ease, box-shadow 0.2s ease
+  transition: transform $animation-duration-fast $animation-easing-default, box-shadow $animation-duration-fast $animation-easing-default
 
   // Modern accent element
   &:before
@@ -17,31 +19,31 @@
     left: 0
     top: 0
     bottom: 0
-    width: var(--border-size-2)
+    width: $alert-accent-width
     box-shadow: var(--shadow-6)
-    z-index: 2
-    animation: pulse 3s infinite alternate
+    z-index: $z-accent-bar
+    animation: pulse $animation-duration-pulse infinite alternate
 
   // Subtle glow effect
   &:after
     content: ""
     position: absolute
-    left: var(--border-size-2)
+    left: $alert-accent-width
     top: 0
     bottom: 0
-    width: var(--size-3)
-    z-index: 1
+    width: $alert-glow-width
+    z-index: $z-glow-effect
     pointer-events: none
     backdrop-filter: blur(2px)
-    opacity: 0.6
+    opacity: $backdrop-opacity
 
 @keyframes pulse
   0%
-    opacity: 0.8
-    transform: scaleY(0.98)
+    opacity: $pulse-opacity-min
+    transform: scaleY($pulse-scale-min)
   100%
-    opacity: 1
-    transform: scaleY(1)
+    opacity: $pulse-opacity-max
+    transform: scaleY($pulse-scale-max)
 
 .markdown-alert-note
   @include alertBox()

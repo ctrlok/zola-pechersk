@@ -58,19 +58,19 @@ footer
   color: var(--muted-color)
 
 
-// Media queries for tablets (max-width: 768px)
-@media screen and (max-width: 768px)
+// Media queries for tablets
+@media screen and (max-width: breakpoint(md))
     .container
-        max-width: 90% // Example override for tablet screens
+        max-width: $container-max-width-tablet
         padding: var(--size-fluid-1)
 
     article
         max-width: 100%
 
-// Media queries for phones (max-width: 480px)
-@media screen and (max-width: 480px)
+// Media queries for phones
+@media screen and (max-width: breakpoint(sm))
     .container
-        max-width: 100%
+        max-width: $container-max-width-phone
         padding: var(--size-fluid-1)
 
     header
@@ -119,6 +119,37 @@ code
 pre code
   background-color: transparent
   padding: var(--size-2) var(--size-2)
+
+// Accessibility improvements
+*:focus-visible
+  outline: $focus-ring-width solid $focus-ring-color
+  outline-offset: $focus-ring-offset
+  border-radius: var(--radius-1)
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce)
+  *,
+  *::before,
+  *::after
+    animation-duration: $reduced-motion-duration !important
+    animation-iteration-count: 1 !important
+    transition-duration: $reduced-motion-duration !important
+    scroll-behavior: auto !important
+
+// Skip link for screen readers
+.skip-link
+  position: absolute
+  top: -40px
+  left: 6px
+  background: var(--bg-color)
+  color: var(--text-color)
+  padding: 8px
+  text-decoration: none
+  border-radius: var(--radius-2)
+  z-index: z-layer(modal)
+  
+  &:focus
+    top: 6px
 
 //a
 //    color: var(--text-color)
