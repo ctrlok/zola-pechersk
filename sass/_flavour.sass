@@ -34,6 +34,10 @@
   --accent-4: #{$accent-4}
   --flavour-header-gradient: linear-gradient(to right, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4))
   --flavour-header-color-text: transparent
+  --flavour-strikethrough-gradient: linear-gradient(to right, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4))
+  --flavour-strikethrough-opacity: 1
+  --flavour-link-gradient: linear-gradient(to right, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-4))
+  --flavour-link-opacity: 1
 
 // Theme-specific header mixins
 @mixin happy-headers
@@ -95,6 +99,10 @@
     --flavour-header-color-text: var(--text-color)
     --flavour-bold-gradient: none
     --flavour-bold-color-text: var(--text-color)
+    --flavour-strikethrough-gradient: none
+    --flavour-strikethrough-opacity: 0.7
+    --flavour-link-gradient: none
+    --flavour-link-opacity: 0.6
     &[color-scheme="light"]
       +monochrome-alert-colors-light
     @media (prefers-color-scheme: light)
@@ -141,5 +149,49 @@ strong, b
   -webkit-background-clip: text
   color: var(--flavour-bold-color-text)
   font-weight: var(--font-weight-strong)
+
+// Gradient strikethrough styling
+del, s
+  position: relative
+  text-decoration: none // Remove default strikethrough
+  
+  &::after
+    content: ""
+    position: absolute
+    left: 0
+    right: 0
+    top: 60%
+    height: 1.5px
+    transform: translateY(-50%)
+    background: var(--flavour-strikethrough-gradient, var(--text-color))
+    opacity: var(--flavour-strikethrough-opacity, 0.7)
+    pointer-events: none
+
+// Gradient link underlines
+a, :link
+  position: relative
+  color: var(--text-color) // Keep text color normal
+  text-decoration: none // Remove default underline
+  cursor: pointer // Show pointer cursor like regular links
+  
+  &::after
+    content: ""
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    height: 1px
+    background: var(--flavour-link-gradient, var(--text-color))
+    opacity: var(--flavour-link-opacity, 0.6)
+    transition: opacity 0.2s ease, height 0.2s ease
+    pointer-events: none
+    
+  &:hover::after
+    opacity: 1
+    height: 2px
+    
+  &:visited
+    color: var(--text-color) // Keep visited links same color as normal text
+    cursor: pointer // Show pointer cursor for visited links too
 
 
