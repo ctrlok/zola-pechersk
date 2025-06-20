@@ -1,0 +1,141 @@
+@use 'variables' as *
+@use 'themes' as *
+@use 'flavour' as *
+
+@keyframes folded-pulse
+  0%
+    opacity: 0.7
+    transform: scaleX(0.98)
+  100%
+    opacity: 1
+    transform: scaleX(1)
+
+.folded
+  position: relative
+  margin: var(--size-fluid-3) 0
+  border-radius: var(--radius-2)
+  overflow: hidden
+  background-color: var(--surface-1)
+  box-shadow: var(--shadow-3)
+  backdrop-filter: blur(4px)
+  transition: transform 0.2s ease, box-shadow 0.2s ease
+
+  // Modern accent element
+  &:before
+    content: ""
+    position: absolute
+    left: 0
+    top: 0
+    bottom: 0
+    width: var(--border-size-2)
+    background-color: var(--accent-color, var(--surface-1))
+    box-shadow: var(--shadow-3)
+    z-index: 2
+    animation: folded-pulse 3s infinite alternate
+
+  // Subtle glow effect
+  &:after
+    content: ""
+    position: absolute
+    left: var(--border-size-2)
+    top: 0
+    bottom: 0
+    width: var(--size-3)
+    z-index: 1
+    pointer-events: none
+    backdrop-filter: blur(2px)
+    opacity: 0.6
+    background: linear-gradient(90deg, var(--accent-color-transparent, rgba(var(--surface-3-rgb), 0.3)), transparent)
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: var(--shadow-4)
+
+  .folded-header
+    padding: var(--size-4) var(--size-4) var(--size-4) var(--size-6)
+    cursor: pointer
+    display: flex
+    justify-content: space-between
+    align-items: center
+    font-weight: var(--font-weight-5)
+    color: var(--text-color)
+    user-select: none
+    position: relative
+    z-index: 3
+    transition: background-color 0.2s ease
+
+    &:hover
+      background-color: var(--surface-2)
+
+    .folded-arrow
+      transition: transform 0.3s ease
+      font-size: var(--font-size-2)
+      display: inline-block
+      margin-left: var(--size-3)
+      color: var(--accent-color, var(--text-color))
+
+  .folded-content
+    max-height: 0
+    overflow: hidden
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease
+    padding: 0 var(--size-6) 0 var(--size-6)
+    opacity: 0
+    transform: translateY(-10px)
+    transition: max-height 0.4s ease-in-out, padding 0.3s ease, opacity 0.3s ease, transform 0.3s ease
+    background-color: var(--surface-1)
+
+    p:first-child
+      margin-top: 0
+
+    p:last-child
+      margin-bottom: 0
+
+  &.active
+    .folded-arrow
+      transform: rotate(180deg)
+
+    .folded-content
+      max-height: 2000px
+      padding: var(--size-3) var(--size-6) var(--size-4) var(--size-6)
+      opacity: 1
+      transform: translateY(0)
+      overflow: auto
+
+// Flavor variations
+.folded.primary
+  &:before
+    background-color: var(--primary)
+
+  &:after
+    background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.3), transparent)
+
+  .folded-arrow
+    color: var(--primary)
+
+.folded.secondary
+  &:before
+    background-color: var(--secondary)
+
+  &:after
+    background: linear-gradient(90deg, rgba(var(--secondary-rgb), 0.3), transparent)
+
+  .folded-arrow
+    color: var(--secondary)
+
+.folded.accent
+  &:before
+    background-color: var(--accent)
+
+  &:after
+    background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.3), transparent)
+
+  .folded-arrow
+    color: var(--accent)
+
+// Media queries for responsive design
+@media screen and (max-width: 768px)
+  .folded
+    margin: var(--size-fluid-2) 0
+
+    .folded-header
+      padding: var(--size-3) var(--size-3) var(--size-3) var(--size-5)

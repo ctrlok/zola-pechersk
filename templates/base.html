@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}"
-    {% if config.extra.color_scheme == "light" %}
-        color-scheme="light"
-    {% elif config.extra.color_scheme == "dark" %}
-        color-scheme="dark"
-    {% endif %}
 
+    {% set color_scheme = config.extra.color_scheme | default(value="auto") %}
     {% if config.extra.flavor %}
       flavor="{{ config.extra.flavor }}"
     {% endif %}
@@ -17,6 +13,7 @@
     
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+    <link rel="stylesheet" href="{{ get_url(path="override.css") }}">
 </head>
 <body>
     <div class="container">
@@ -26,6 +23,8 @@
                 <p class="subtitle">{{ section.description }}</p>
             {% endif %}
             <!-- Theme toggle will be inserted here by JavaScript if enabled -->
+            <script src={{ get_url(path="js/mermaid.min.js") }}></script>
+
         </header>
 
         <main>

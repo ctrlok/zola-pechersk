@@ -7,28 +7,37 @@
 
 .footnote-definition
   width: var(--footnote-width)
-  z-index: var(--layer-2)
+  z-index: var(--layer-1)
   margin-top: 1px
   //margin-bottom: var(--size-3)
   position: relative
   float: right
   clear: right
   margin-right: calc(-1 * var(--footnote-width) - var(--footnote-margin))
-  border-left: var(--border-size-1) solid var(--border-color-sidenote)
+  border-left: 0.5px solid var(--border-color-sidenote)
   padding-left: var(--size-3)
   padding-right: 0
   transition: margin-right 0.3s ease-out, width 0.3s ease-out
   
   *
-    display: inline-flex
     color: var(--muted-color)
     font-size: var(--font-size-0)
     font-weight: var(--font-weight-2)
     line-height: var(--font-lineheight-1)
 
+  ol, ul
+    padding-inline-start: var(--size-2)
+
+  code
+    padding: 0
+  img
+    margin-top: var(--size-1)
+    margin-bottom: var(--size-1)
+    box-shadow: var(--shadow-4)
+
   p
-    margin-top: 0
-    margin-bottom: 0
+    margin-top: var(--size-2)
+    margin-bottom: var(--size-2)
 
   // First paragraph after the label should be inline
   .footnote-definition-label + p
@@ -37,7 +46,7 @@
   sup.footnote-definition-label
     color: var(--muted-color)
     line-height: var(--font-lineheight-1)
-    display: inline-block
+    display: none
     margin-left: -0.7rem
     position: relative
     left: -0.01rem
@@ -48,7 +57,7 @@
     margin-left: calc(-1 * var(--footnote-width) - var(--footnote-margin))
     margin-right: 0
     border-left: none
-    border-right: var(--border-size-1) solid var(--border-color-sidenote)
+    border-right: 0.5px solid var(--border-color-sidenote)
     padding-left: 0
     padding-right: var(--size-2)
     
