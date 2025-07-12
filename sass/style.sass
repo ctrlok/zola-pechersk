@@ -1,15 +1,23 @@
+// Configuration first
+@use 'tokens' as *
 
-// Internal SASS modules (using @use for better dependency management)
-@use 'variables' as *
-@use 'themes'
+// Foundation
+@use 'reset'
+@use 'grid'
+
+// Content
 @use 'typography'
-@use 'flavour'
-@use 'base'
+@use 'colors'
+@use 'code'
+
+// Components
 @use 'footnotes'
-@use 'quote'
+@use 'alerts'  
 @use 'folded'
+
+// Utilities last
+@use 'utils'
 
 // External CSS imports (must use @import for external URLs)
 @import url("/css/open-props.css")
 @import url("/css/syntax-theme-deep.css")
-

@@ -10,6 +10,7 @@ highlight_theme = "css"
 definition_list = true
 gfm = true
 subsupscript = true
+github_alerts = true
 
 [languages.ua.translations]
 summary = "Мій блог"

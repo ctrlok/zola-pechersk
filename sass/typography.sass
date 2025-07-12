@@ -1,10 +1,15 @@
-@use 'variables' as *
-@use 'themes' as *
+@use 'tokens' as *
 
 // Headers common styles
 h1, h2, h3, h4, h5, h6
   margin-top: var(--size-fluid-2)
   margin-bottom: var(--size-fluid-0)
+  // Apply gradients from color system
+  background-image: var(--flavour-header-gradient)
+  background-size: $content-max-width
+  background-clip: text
+  -webkit-background-clip: text
+  color: var(--flavour-header-color-text)
 
 // Remove top margin when headers follow other headers
 h1 + h2,
@@ -33,7 +38,6 @@ h1
   font-size: var(--font-size-fluid-3)
   font-weight: var(--font-weight-1)
 
-
 h2
   font-size: var(--font-size-fluid-3)
   font-weight: var(--font-weight-1)
@@ -59,6 +63,14 @@ h6
   font-weight: var(--font-weight-2)
   border-bottom: var(--border-size-1) solid var(--border-color)
 
+// Header gradient styling
+header
+  background-image: var(--flavour-header-gradient)
+  background-size: $content-max-width
+  background-clip: text
+  -webkit-background-clip: text
+  color: var(--flavour-header-color-text)
+
 // Paragraph styles
 p
   margin-bottom: var(--size-fluid-1)
@@ -72,6 +84,7 @@ ul, ol
 li
   margin-bottom: var(--size-1)
 
+// Post-specific typography
 h1.post-title
   margin-top: var(--size-fluid-1)
   margin-bottom: 0
@@ -96,3 +109,55 @@ p.post-date
   margin-block-start: 0
   line-height: var(--font-lineheight-1)
   margin-block-end: var(--size-fluid-3)
+
+// Text styling with gradients
+strong, b
+  background-image: var(--flavour-bold-gradient)
+  background-clip: text
+  -webkit-background-clip: text
+  color: var(--flavour-bold-color-text)
+  font-weight: var(--font-weight-strong)
+
+// Gradient strikethrough styling
+del, s
+  position: relative
+  text-decoration: none // Remove default strikethrough
+  
+  &::after
+    content: ""
+    position: absolute
+    left: 0
+    right: 0
+    top: 60%
+    height: 1.5px
+    transform: translateY(-50%)
+    background: var(--flavour-strikethrough-gradient, var(--text-color))
+    opacity: var(--flavour-strikethrough-opacity, 0.7)
+    pointer-events: none
+
+// Gradient link underlines
+a, :link
+  position: relative
+  color: var(--text-color) // Keep text color normal
+  text-decoration: none // Remove default underline
+  cursor: pointer // Show pointer cursor like regular links
+  
+  &::after
+    content: ""
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    height: 1px
+    background: var(--flavour-link-gradient, var(--text-color))
+    opacity: var(--flavour-link-opacity, 0.6)
+    transition: opacity 0.2s ease, height 0.2s ease
+    pointer-events: none
+    
+  &:hover::after
+    opacity: 1
+    height: 2px
+    
+  &:visited
+    color: var(--text-color) // Keep visited links same color as normal text
+    cursor: pointer // Show pointer cursor for visited links too
