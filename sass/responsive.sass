@@ -1,0 +1,129 @@
+@use 'tokens' as *
+
+// =============================================================================
+// ESSENTIAL RESPONSIVE SYSTEM
+// =============================================================================
+// Core responsive patterns for the theme
+
+/// Responsive mixin with enhanced breakpoint support
+/// @param {String} $breakpoint - Breakpoint name from tokens
+/// @param {String} $direction - 'up' (min-width) or 'down' (max-width)
+@mixin respond-to($breakpoint, $direction: 'up')
+  @if not map-has-key($breakpoints, $breakpoint)
+    @error "Unknown breakpoint `#{$breakpoint}`. Available: #{map-keys($breakpoints)}"
+  
+  $size: map-get($breakpoints, $breakpoint)
+  
+  @if $direction == 'up'
+    @media (min-width: $size)
+      @content
+  @else if $direction == 'down'
+    @media (max-width: #{$size - 1px})
+      @content
+  @else
+    @error "Direction must be 'up' or 'down', got `#{$direction}`"
+
+/// Between two breakpoints
+/// @param {String} $min-breakpoint - Minimum breakpoint
+/// @param {String} $max-breakpoint - Maximum breakpoint
+@mixin respond-between($min-breakpoint, $max-breakpoint)
+  @if not map-has-key($breakpoints, $min-breakpoint)
+    @error "Unknown min breakpoint `#{$min-breakpoint}`. Available: #{map-keys($breakpoints)}"
+  @if not map-has-key($breakpoints, $max-breakpoint)
+    @error "Unknown max breakpoint `#{$max-breakpoint}`. Available: #{map-keys($breakpoints)}"
+  
+  $min-size: map-get($breakpoints, $min-breakpoint)
+  $max-size: map-get($breakpoints, $max-breakpoint)
+  
+  @media (min-width: $min-size) and (max-width: #{$max-size - 1px})
+    @content
+
+/// Container query with fallback
+/// @param {String} $condition - Container query condition
+/// @param {String} $fallback-breakpoint - Fallback breakpoint for unsupported browsers
+@mixin container-query($condition, $fallback-breakpoint: null)
+  @supports (container-type: inline-size)
+    @container #{$condition}
+      @content
+  
+  // Fallback for browsers without container query support
+  @supports not (container-type: inline-size)
+    @if $fallback-breakpoint
+      @include respond-to($fallback-breakpoint)
+        @content
+    @else
+      @content
+
+/// Responsive grid system
+/// @param {Number} $mobile-cols - Columns on mobile
+/// @param {Number} $tablet-cols - Columns on tablet
+/// @param {Number} $desktop-cols - Columns on desktop
+/// @param {String} $gap - Grid gap
+@mixin responsive-grid($mobile-cols: 1, $tablet-cols: 2, $desktop-cols: 3, $gap: space('md'))
+  display: grid
+  gap: $gap
+  grid-template-columns: repeat(#{$mobile-cols}, 1fr)
+  
+  @include respond-to('md')
+    grid-template-columns: repeat(#{$tablet-cols}, 1fr)
+  
+  @include respond-to('lg')
+    grid-template-columns: repeat(#{$desktop-cols}, 1fr)
+
+/// Responsive container with max-width constraints
+/// @param {String} $size - Container size variant
+@mixin container($size: 'default')
+  width: 100%
+  margin-left: auto
+  margin-right: auto
+  padding-left: space('md')
+  padding-right: space('md')
+  
+  @if $size == 'narrow'
+    max-width: 60rem
+  @else if $size == 'wide'
+    max-width: 90rem
+  @else if $size == 'full'
+    max-width: none
+  @else
+    max-width: 75rem
+  
+  @include respond-to('sm')
+    padding-left: space('lg')
+    padding-right: space('lg')
+
+/// Accessibility media queries
+@mixin reduced-motion
+  @media (prefers-reduced-motion: reduce)
+    @content
+
+@mixin dark-mode
+  @media (prefers-color-scheme: dark)
+    @content
+
+@mixin light-mode
+  @media (prefers-color-scheme: light)
+    @content
+
+@mixin can-hover
+  @media (hover: hover) and (pointer: fine)
+    @content
+
+// =============================================================================
+// ESSENTIAL RESPONSIVE UTILITIES (Only the most commonly needed)
+// =============================================================================
+
+// Show/hide utilities for major breakpoints only
+@include respond-to('md')
+  .u-hidden-md-up
+    display: none !important
+
+@include respond-to('lg')
+  .u-hidden-lg-up
+    display: none !important
+
+// Helper function (from mixins.sass)
+@function strip-unit($number)
+  @if type-of($number) == 'number' and not unitless($number)
+    @return $number / ($number * 0 + 1)
+  @return $number

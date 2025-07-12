@@ -1,21 +1,28 @@
-// Configuration first
-@use 'tokens' as *
+// =============================================================================
+// MAIN STYLESHEET
+// =============================================================================
+// Entry point for the design system
 
-// Foundation
+// Configuration first (order matters)
+@use 'tokens' as *
+@use 'mixins' as *
+@use 'responsive' as *
+
+// Foundation styles
 @use 'reset'
 @use 'grid'
 
-// Content
+// Content styles
 @use 'typography'
 @use 'colors'
 @use 'code'
 
-// Components
+// Interactive components
 @use 'footnotes'
 @use 'alerts'  
 @use 'folded'
 
-// Utilities last
+// Utilities last (highest specificity)
 @use 'utils'
 
 // External CSS imports (must use @import for external URLs)

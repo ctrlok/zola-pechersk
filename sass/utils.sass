@@ -1,2 +1,207 @@
-// Utility classes for common patterns
-// Add utility classes here as needed
+@use 'tokens' as *
+@use 'mixins' as *
+
+// =============================================================================
+// ESSENTIAL UTILITY CLASSES
+// =============================================================================
+// Strategic utilities with minimal !important usage
+
+// =============================================================================
+// SPACING UTILITIES (Core utilities - need !important for overrides)
+// =============================================================================
+
+// Only generate commonly used spacing utilities
+@each $name, $value in $spacing
+  @if $name == 'none' or $name == 'sm' or $name == 'md' or $name == 'lg'
+    .u-m-#{$name}
+      margin: $value !important
+    
+    .u-p-#{$name}
+      padding: $value !important
+    
+    .u-mb-#{$name}
+      margin-bottom: $value !important
+    
+    .u-mt-#{$name}
+      margin-top: $value !important
+
+// =============================================================================
+// DISPLAY UTILITIES (Need !important for responsive overrides)
+// =============================================================================
+
+.u-block
+  display: block !important
+
+.u-flex
+  display: flex !important
+
+.u-grid
+  display: grid !important
+
+.u-hidden
+  display: none !important
+
+.u-inline-block
+  display: inline-block !important
+
+// =============================================================================
+// FLEXBOX UTILITIES (Common patterns without !important)
+// =============================================================================
+
+.u-flex-col
+  flex-direction: column
+
+.u-items-center
+  align-items: center
+
+.u-items-start
+  align-items: flex-start
+
+.u-justify-center
+  justify-content: center
+
+.u-justify-between
+  justify-content: space-between
+
+.u-flex-1
+  flex: 1 1 0%
+
+.u-gap-xs
+  gap: space('xs')
+
+.u-gap-sm
+  gap: space('sm')
+
+.u-gap-md
+  gap: space('md')
+
+.u-gap-lg
+  gap: space('lg')
+
+// =============================================================================
+// GRID UTILITIES (Common patterns)
+// =============================================================================
+
+.u-grid-cols-1
+  grid-template-columns: repeat(1, minmax(0, 1fr))
+
+.u-grid-cols-2
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+
+.u-grid-cols-3
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+
+// =============================================================================
+// POSITION UTILITIES (Need !important for layout overrides)
+// =============================================================================
+
+.u-relative
+  position: relative !important
+
+.u-absolute
+  position: absolute !important
+
+.u-fixed
+  position: fixed !important
+
+// =============================================================================
+// TEXT UTILITIES (Common patterns)
+// =============================================================================
+
+.u-text-center
+  text-align: center
+
+.u-text-left
+  text-align: left
+
+.u-text-right
+  text-align: right
+
+.u-font-bold
+  font-weight: 700
+
+.u-uppercase
+  text-transform: uppercase
+
+.u-truncate
+  @include truncate(1)
+
+// =============================================================================
+// WIDTH & HEIGHT (Essential sizing)
+// =============================================================================
+
+.u-w-full
+  width: 100%
+
+.u-h-full
+  height: 100%
+
+.u-w-auto
+  width: auto
+
+.u-h-auto
+  height: auto
+
+// =============================================================================
+// ACCESSIBILITY UTILITIES (Critical for a11y)
+// =============================================================================
+
+.u-sr-only
+  @include sr-only
+
+.u-focus-ring
+  &:focus-visible
+    @include focus-ring
+
+// =============================================================================
+// INTERACTION UTILITIES (Essential for UX)
+// =============================================================================
+
+.u-cursor-pointer
+  cursor: pointer
+
+.u-cursor-not-allowed
+  cursor: not-allowed
+
+.u-pointer-events-none
+  pointer-events: none !important
+
+.u-select-none
+  user-select: none
+
+// =============================================================================
+// BORDER UTILITIES (Common patterns)
+// =============================================================================
+
+.u-border
+  border: 1px solid var(--border-color)
+
+.u-border-0
+  border: 0
+
+.u-rounded
+  border-radius: var(--radius-2)
+
+.u-rounded-full
+  border-radius: 9999px
+
+// =============================================================================
+// OVERFLOW UTILITIES (Layout critical)
+// =============================================================================
+
+.u-overflow-hidden
+  overflow: hidden
+
+.u-overflow-auto
+  overflow: auto
+
+// =============================================================================
+// DEBUG UTILITIES (Development only)
+// =============================================================================
+
+.debug-outline
+  outline: 2px solid red !important
+
+.debug-grid
+  background-image: linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px)
+  background-size: 1rem 1rem

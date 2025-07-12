@@ -1,4 +1,5 @@
 @use 'tokens' as *
+@use 'mixins' as *
 
 :root
   --base-font: var(--font-system-ui), ui-serif
@@ -29,18 +30,16 @@ mark
 
 // Accessibility improvements
 *:focus-visible
-  outline: $focus-ring-width solid $focus-ring-color
-  outline-offset: $focus-ring-offset
-  border-radius: var(--radius-1)
+  @include focus-ring
 
 // Reduced motion support
 @media (prefers-reduced-motion: reduce)
   *,
   *::before,
   *::after
-    animation-duration: $reduced-motion-duration !important
+    animation-duration: 0.01s !important
     animation-iteration-count: 1 !important
-    transition-duration: $reduced-motion-duration !important
+    transition-duration: 0.01s !important
     scroll-behavior: auto !important
 
 // Skip link for screen readers

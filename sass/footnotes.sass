@@ -87,47 +87,46 @@ sup.footnote-reference
   :visited
     color: var(--text-color)
 
+// =============================================================================
+// UNIFIED MOBILE FOOTNOTES - MATCHING DESKTOP AESTHETIC
+// =============================================================================
+
 // Mobile/tablet footnotes: container queries (modern approach)
 @container main-container (max-width: breakpoint(lg))
-  // Use higher specificity to override desktop styles
   .footnote-definition,
   .footnote-definition[id*="left"],
   .footnote-definition:not([id*="left"])
-    // Reset all desktop float-based positioning
+    // Reset desktop positioning
     float: none
     clear: none
     position: static
     right: unset
     left: unset
     
-    // Quote-like design - use natural content width like blockquotes
+    // Clean mobile layout - inline with content flow
     display: block
     width: auto
     max-width: none
-    margin: var(--size-fluid-3) 0
-    padding: var(--size-fluid-2)
+    margin: var(--size-fluid-2) 0
+    padding: var(--size-3) var(--size-3) var(--size-3) var(--size-4)
     
-    // Beautiful styling
-    background: linear-gradient(135deg, var(--surface-1) 0%, var(--surface-2) 100%)
-    backdrop-filter: blur(8px)
-    border: 1px solid var(--border-color)
-    border-top: 3px solid var(--blue-6)
-    border-left: 1px solid var(--border-color) // Override desktop border-left
-    border-right: 1px solid var(--border-color) // Override desktop border-right
-    border-radius: var(--radius-3)
-    box-shadow: var(--shadow-4)
+    // Minimal styling matching desktop aesthetic
+    background: none
+    border: none
+    border-left: 3px solid var(--border-color-sidenote)
+    border-radius: 0
+    box-shadow: none
     
-    // Typography reset - override both left and right sidenote text alignment
+    // Clean typography - consistent with desktop
     text-align: left
     
-    // Hover effects
-    transition: transform $animation-duration-medium $animation-easing-default, box-shadow $animation-duration-medium $animation-easing-default
+    // Subtle hover effect (much lighter than before)
+    transition: border-color $animation-duration-fast $animation-easing-default
     
     &:hover
-      transform: translateY(-2px)
-      box-shadow: var(--shadow-6)
+      border-left-color: var(--text-color)
     
-    // Enhanced content styling with higher specificity
+    // Content styling - closer to desktop
     > *, 
     p, 
     li, 
@@ -135,101 +134,97 @@ sup.footnote-reference
     strong,
     em,
     code
-      color: var(--text-color)
-      font-size: var(--font-size-1)
-      line-height: var(--font-lineheight-2)
+      color: var(--muted-color)
+      font-size: var(--font-size-0)
+      font-weight: var(--font-weight-2)
+      line-height: var(--font-lineheight-1)
       
     p
       margin: var(--size-2) 0
       
       &:first-of-type
-        margin-top: var(--size-1)
+        margin-top: 0
         
       &:last-of-type
-        margin-bottom: var(--size-1)
+        margin-bottom: 0
     
-    // Simple footnote numbers
+    // Footnote labels - minimal and clean
     sup.footnote-definition-label
       display: inline
       background: none
-      color: var(--text-color)
+      color: var(--muted-color)
       border-radius: 0
       width: auto
       height: auto
-      font-size: var(--font-size-1)
-      font-weight: var(--font-weight-7)
+      font-size: var(--font-size-0)
+      font-weight: var(--font-weight-4)
       margin: 0 var(--size-1) 0 0
       box-shadow: none
-      line-height: var(--font-lineheight-2)
+      line-height: var(--font-lineheight-1)
       position: relative
       float: none
       left: 0
       
-    // Enhanced code blocks
+    // Code styling - minimal
     code
-      background-color: var(--surface-3)
-      padding: var(--size-1) var(--size-2)
-      border-radius: var(--radius-2)
+      background-color: var(--surface-1)
+      padding: var(--size-1) var(--size-1)
+      border-radius: var(--radius-1)
       font-size: var(--font-size-0)
       
-    // Improved lists - override both left and right sidenote list styles
+    // Lists - clean styling
     ol, 
     ul
       margin: var(--size-2) 0
-      padding-inline-start: var(--size-4)
-      padding-inline-end: 0 // Ensure left-to-right for all
+      padding-inline-start: var(--size-3)
+      padding-inline-end: 0
       text-align: left
       
       li
         margin-bottom: var(--size-1)
         text-align: left
         
-    // Better images
+    // Images - simple styling
     img
-      border-radius: var(--radius-2)
-      margin: var(--size-3) 0
+      border-radius: var(--radius-1)
+      margin: var(--size-2) 0
 
-// Media query fallbacks for browsers without container query support
+// Media query fallback for browsers without container query support
 @media screen and (max-width: breakpoint(lg))
-  // Use higher specificity to override desktop styles
   .footnote-definition,
   .footnote-definition[id*="left"],
   .footnote-definition:not([id*="left"])
-    // Reset all desktop float-based positioning
+    // Reset desktop positioning
     float: none
     clear: none
     position: static
     right: unset
     left: unset
     
-    // Quote-like design - use natural content width like blockquotes
+    // Clean mobile layout - inline with content flow
     display: block
     width: auto
     max-width: none
-    margin: var(--size-fluid-3) 0
-    padding: var(--size-fluid-2)
+    margin: var(--size-fluid-2) 0
+    padding: var(--size-3) var(--size-3) var(--size-3) var(--size-4)
     
-    // Beautiful styling
-    background: linear-gradient(135deg, var(--surface-1) 0%, var(--surface-2) 100%)
-    backdrop-filter: blur(8px)
-    border: 1px solid var(--border-color)
-    border-top: 3px solid var(--blue-6)
-    border-left: 1px solid var(--border-color) // Override desktop border-left
-    border-right: 1px solid var(--border-color) // Override desktop border-right
-    border-radius: var(--radius-3)
-    box-shadow: var(--shadow-4)
+    // Minimal styling matching desktop aesthetic
+    background: none
+    border: none
+    border-left: 3px solid var(--border-color-sidenote)
+    border-radius: 0
+    box-shadow: none
     
-    // Typography reset - override both left and right sidenote text alignment
+    // Clean typography - consistent with desktop
     text-align: left
     
-    // Hover effects
-    transition: transform $animation-duration-medium $animation-easing-default, box-shadow $animation-duration-medium $animation-easing-default
+    // Subtle hover effect (much lighter than before)
+    transition: border-color $animation-duration-fast $animation-easing-default
     
     &:hover
-      transform: translateY(-2px)
-      box-shadow: var(--shadow-6)
+      border-left-color: var(--text-color)
     
-    // Enhanced content styling with higher specificity
+    // Content styling - closer to desktop
     > *, 
     p, 
     li, 
@@ -237,73 +232,69 @@ sup.footnote-reference
     strong,
     em,
     code
-      color: var(--text-color)
-      font-size: var(--font-size-1)
-      line-height: var(--font-lineheight-2)
+      color: var(--muted-color)
+      font-size: var(--font-size-0)
+      font-weight: var(--font-weight-2)
+      line-height: var(--font-lineheight-1)
       
     p
       margin: var(--size-2) 0
       
       &:first-of-type
-        margin-top: var(--size-1)
+        margin-top: 0
         
       &:last-of-type
-        margin-bottom: var(--size-1)
+        margin-bottom: 0
     
-    // Simple footnote numbers
+    // Footnote labels - minimal and clean
     sup.footnote-definition-label
       display: inline
       background: none
-      color: var(--text-color)
+      color: var(--muted-color)
       border-radius: 0
       width: auto
       height: auto
-      font-size: var(--font-size-1)
-      font-weight: var(--font-weight-7)
+      font-size: var(--font-size-0)
+      font-weight: var(--font-weight-4)
       margin: 0 var(--size-1) 0 0
       box-shadow: none
-      line-height: var(--font-lineheight-2)
+      line-height: var(--font-lineheight-1)
       position: relative
       float: none
       left: 0
       
-    // Enhanced code blocks
+    // Code styling - minimal
     code
-      background-color: var(--surface-3)
-      padding: var(--size-1) var(--size-2)
-      border-radius: var(--radius-2)
+      background-color: var(--surface-1)
+      padding: var(--size-1) var(--size-1)
+      border-radius: var(--radius-1)
       font-size: var(--font-size-0)
       
-    // Improved lists - override both left and right sidenote list styles
+    // Lists - clean styling
     ol, 
     ul
       margin: var(--size-2) 0
-      padding-inline-start: var(--size-4)
-      padding-inline-end: 0 // Ensure left-to-right for all
+      padding-inline-start: var(--size-3)
+      padding-inline-end: 0
       text-align: left
       
       li
         margin-bottom: var(--size-1)
         text-align: left
         
-    // Better images
+    // Images - simple styling
     img
-      border-radius: var(--radius-2)
-      margin: var(--size-3) 0
+      border-radius: var(--radius-1)
+      margin: var(--size-2) 0
 
-// Small screen optimizations
+// Small screen optimizations - keep styling minimal
 @media screen and (max-width: breakpoint(sm))
   .footnote-definition,
   .footnote-definition[id*="left"],
   .footnote-definition:not([id*="left"])
-    margin: var(--size-fluid-2) 0
-    padding: var(--size-3)
-    border-radius: var(--radius-2)
-    border-top-width: 2px
-    
-    sup.footnote-definition-label
-      font-size: var(--font-size-0)
-      margin: 0 var(--size-1) 0 0
+    margin: var(--size-fluid-1) 0
+    padding: var(--size-2) var(--size-2) var(--size-2) var(--size-3)
+    border-left-width: 2px
 
 // Enhanced accessibility
 @media (prefers-reduced-motion: reduce)
@@ -315,20 +306,10 @@ sup.footnote-reference
 
 // Focus management for keyboard navigation
 .footnote-definition:target
-  outline: 3px solid var(--blue-6)
-  outline-offset: 2px
+  border-left-color: var(--blue-6)
+  border-left-width: 4px
 
-// Dark mode enhancements
-@media (prefers-color-scheme: dark)
-  @media screen and (max-width: breakpoint(lg))
-    .footnote-definition,
-    .footnote-definition[id*="left"],
-    .footnote-definition:not([id*="left"])
-      background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface-3) 100%)
-      border-color: var(--surface-4)
-      border-top-color: var(--cyan-5)
-
-// Print styles
+// Print styles - maintain minimal approach
 @media print
   .footnote-definition,
   .footnote-definition[id*="left"],
@@ -340,9 +321,10 @@ sup.footnote-reference
     clear: none
     width: 100%
     margin: var(--size-2) 0
-    padding: var(--size-2)
-    border: 1px solid var(--gray-5)
-    border-radius: var(--radius-2)
+    padding: var(--size-2) var(--size-3)
+    border: none
+    border-left: 1px solid var(--gray-5)
+    border-radius: 0
     background: none
     box-shadow: none
     page-break-inside: avoid
@@ -356,10 +338,5 @@ sup.footnote-reference
       height: auto
       box-shadow: none
       float: none
-      font-weight: var(--font-weight-7)
+      font-weight: var(--font-weight-4)
       left: 0
-
-
-
-// Legacy CSS custom properties (removed - now handled by CSS Grid)
-// These were needed for the float-based layout but are no longer required
