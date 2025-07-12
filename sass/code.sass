@@ -1,22 +1,187 @@
-// Code styles
-pre
-  background-color: var(--surface-2)
-  padding: var(--size-fluid-2)
-  border-radius: var(--radius-2)
-  overflow-x: auto
+@use 'tokens' as *
+
+// =============================================================================
+// APPLE LIQUID GLASS CODE BLOCKS
+// =============================================================================
+// Works with syntax-theme-deep-glass.css for clean architecture
+
+// Apple-inspired frosted glass code blocks
+pre,
+.z-code
+  position: relative
   margin: var(--size-fluid-3) 0
-  box-shadow: var(--shadow-2)
+  border-radius: 16px
+  overflow: hidden
+  
+  // Glass effect - syntax theme handles background color (transparent)
+  backdrop-filter: blur(20px) saturate(180%)
+  -webkit-backdrop-filter: blur(20px) saturate(180%)
+  
+  // Glass styling
+  border: 1px solid rgba(255, 255, 255, 0.15)
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)
+  
+  // Layout
+  padding: 16px 20px
+  overflow-x: auto
+  -webkit-overflow-scrolling: touch
+  
+  // Hover effect
+  transition: transform 0.2s ease, box-shadow 0.2s ease
+  
+  &:hover
+    transform: translateY(-1px)
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)
 
+  // Language badge - Apple-style pill design
+  &[data-lang]:before
+    content: attr(data-lang)
+    position: absolute
+    top: 12px
+    right: 16px
+    
+    // Pill design
+    background: rgba(255, 255, 255, 0.15)
+    backdrop-filter: blur(10px)
+    border: 1px solid rgba(255, 255, 255, 0.2)
+    border-radius: 12px
+    
+    // Typography
+    color: rgba(255, 255, 255, 0.8)
+    font-size: 11px
+    font-weight: 600
+    line-height: 1
+    letter-spacing: 0.5px
+    text-transform: uppercase
+    
+    // Spacing
+    padding: 4px 8px
+    
+    // Smooth transitions
+    transition: all 0.2s ease
+  
+  &:hover:before
+    background: rgba(255, 255, 255, 0.25)
+    color: rgba(255, 255, 255, 0.9)
+    border-color: rgba(255, 255, 255, 0.3)
+  
+  // Language-specific labels
+  &[data-lang="javascript"]:before,
+  &[data-lang="js"]:before
+    content: "JavaScript"
+  
+  &[data-lang="typescript"]:before,
+  &[data-lang="ts"]:before
+    content: "TypeScript"
+    
+  &[data-lang="python"]:before,
+  &[data-lang="py"]:before
+    content: "Python"
+    
+  &[data-lang="rust"]:before,
+  &[data-lang="rs"]:before
+    content: "Rust"
+    
+  &[data-lang="sass"]:before,
+  &[data-lang="scss"]:before
+    content: "Sass"
+    
+  &[data-lang="html"]:before
+    content: "HTML"
+    
+  &[data-lang="css"]:before
+    content: "CSS"
+    
+  &[data-lang="bash"]:before,
+  &[data-lang="sh"]:before
+    content: "Shell"
+    
+  &[data-lang="json"]:before
+    content: "JSON"
+    
+  &[data-lang="yaml"]:before,
+  &[data-lang="yml"]:before
+    content: "YAML"
+    
+  &[data-lang="toml"]:before
+    content: "TOML"
+    
+  &[data-lang="markdown"]:before,
+  &[data-lang="md"]:before
+    content: "Markdown"
+
+// Dark theme adjustments for glass effects
+@media (prefers-color-scheme: dark)
+  pre,
+  .z-code
+    border-color: rgba(255, 255, 255, 0.2)
+    
+    &:before
+      background: rgba(0, 0, 0, 0.4)
+      border-color: rgba(255, 255, 255, 0.2)
+      color: rgba(255, 255, 255, 0.7)
+    
+    &:hover:before
+      background: rgba(0, 0, 0, 0.5)
+      border-color: rgba(255, 255, 255, 0.3)
+      color: rgba(255, 255, 255, 0.9)
+
+// Manual dark theme for glass effects
+html[color-scheme="dark"] pre,
+html[color-scheme="dark"] .z-code
+  border-color: rgba(255, 255, 255, 0.2)
+  
+  &:before
+    background: rgba(0, 0, 0, 0.4)
+    border-color: rgba(255, 255, 255, 0.2)
+    color: rgba(255, 255, 255, 0.7)
+  
+  &:hover:before
+    background: rgba(0, 0, 0, 0.5)
+    border-color: rgba(255, 255, 255, 0.3)
+    color: rgba(255, 255, 255, 0.9)
+
+// Special case for mermaid diagrams
 pre.mermaid
-    background-color: var(--bg-color)
+  backdrop-filter: none
+  border: 1px solid var(--border-color)
+  
+  &:before
+    display: none
 
+// =============================================================================
+// APPLE-STYLE INLINE CODE
+// =============================================================================
+
+// Inline code with subtle glass effect
 code
   font-family: var(--code-font), monospace
-  background-color: var(--surface-1)
-  padding: 0
-  border-radius: var(--radius-2)
-  font-size: var(--font-size-1)
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(10px)
+  border: 1px solid rgba(255, 255, 255, 0.2)
+  border-radius: 6px
+  padding: 2px 6px
+  font-size: 0.9em
+  color: var(--text-color)
+  
+// Dark theme inline code
+@media (prefers-color-scheme: dark)
+  code
+    background: rgba(0, 0, 0, 0.2)
+    border-color: rgba(255, 255, 255, 0.25)
 
-pre code
-  background-color: transparent
-  padding: var(--size-2) var(--size-2)
+html[color-scheme="dark"] code
+  background: rgba(0, 0, 0, 0.2)
+  border-color: rgba(255, 255, 255, 0.25)
+
+// Code inside pre blocks - let syntax theme handle colors
+pre code,
+.z-code code
+  background: transparent
+  backdrop-filter: none
+  border: none
+  padding: 0
+  margin: var(--size-2) 0
+  font-size: var(--font-size-1)
+  line-height: 1.5
+  display: block
