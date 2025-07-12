@@ -88,150 +88,111 @@ sup.footnote-reference
     color: var(--text-color)
 
 // =============================================================================
-// UNIFIED MOBILE FOOTNOTES - MATCHING DESKTOP AESTHETIC
+// IPAD LAYOUT - RIGHT-ONLY FOOTNOTES (768px - 1023px)
 // =============================================================================
 
-// Mobile/tablet footnotes: container queries (modern approach)
-@container main-container (max-width: breakpoint(lg))
+@media screen and (min-width: breakpoint(md)) and (max-width: calc(breakpoint(lg) - 1px))
   .footnote-definition,
   .footnote-definition[id*="left"],
   .footnote-definition:not([id*="left"])
-    // Reset desktop positioning
-    float: none
-    clear: none
-    position: static
-    right: unset
-    left: unset
+    // Force all footnotes to right side only
+    float: right !important
+    clear: right !important
     
-    // Clean mobile layout - inline with content flow
-    display: block
-    width: auto
-    max-width: none
-    margin: var(--size-fluid-2) 0
-    padding: var(--size-3) var(--size-3) var(--size-3) var(--size-4)
+    // iPad-specific positioning - make footnotes visible
+    width: 200px // Fixed width for iPad
+    margin: var(--size-2) var(--size-2) var(--size-2) var(--size-3)
+    padding: var(--size-3) var(--size-2)
     
-    // Minimal styling matching desktop aesthetic
+    // Right-side styling for all footnotes
+    border-left: 0.5px solid var(--border-color-sidenote) !important
+    border-right: none !important
     background: none
-    border: none
-    border-left: 3px solid var(--border-color-sidenote)
     border-radius: 0
     box-shadow: none
     
-    // Clean typography - consistent with desktop
-    text-align: left
+    // Always left-aligned text
+    text-align: left !important
     
-    // Subtle hover effect (much lighter than before)
+    // Hover effect
     transition: border-color $animation-duration-fast $animation-easing-default
     
     &:hover
       border-left-color: var(--text-color)
     
-    // Content styling - closer to desktop
-    > *, 
-    p, 
-    li, 
-    span,
-    strong,
-    em,
-    code
+    // Content styling
+    *
       color: var(--muted-color)
       font-size: var(--font-size-0)
       font-weight: var(--font-weight-2)
       line-height: var(--font-lineheight-1)
-      
-    p
-      margin: var(--size-2) 0
-      
-      &:first-of-type
-        margin-top: 0
-        
-      &:last-of-type
-        margin-bottom: 0
     
-    // Footnote labels - minimal and clean
-    sup.footnote-definition-label
-      display: inline
-      background: none
-      color: var(--muted-color)
-      border-radius: 0
-      width: auto
-      height: auto
-      font-size: var(--font-size-0)
-      font-weight: var(--font-weight-4)
-      margin: 0 var(--size-1) 0 0
-      box-shadow: none
-      line-height: var(--font-lineheight-1)
-      position: relative
-      float: none
-      left: 0
+    ol, ul
+      padding-inline-start: var(--size-2)
+      text-align: left !important
       
-    // Code styling - minimal
     code
-      background-color: var(--surface-1)
-      padding: var(--size-1) var(--size-1)
-      border-radius: var(--radius-1)
-      font-size: var(--font-size-0)
+      padding: 0
       
-    // Lists - clean styling
-    ol, 
-    ul
-      margin: var(--size-2) 0
-      padding-inline-start: var(--size-3)
-      padding-inline-end: 0
-      text-align: left
-      
-      li
-        margin-bottom: var(--size-1)
-        text-align: left
-        
-    // Images - simple styling
     img
-      border-radius: var(--radius-1)
-      margin: var(--size-2) 0
+      margin: var(--size-1) 0
+      box-shadow: var(--shadow-4)
+      max-width: 100%
 
-// Media query fallback for browsers without container query support
-@media screen and (max-width: breakpoint(lg))
+    p
+      margin: var(--size-2) 0
+      
+      &:first-of-type
+        margin-top: 0
+        
+      &:last-of-type
+        margin-bottom: 0
+
+    // Footnote labels
+    sup.footnote-definition-label
+      display: inline
+      color: var(--muted-color)
+      line-height: var(--font-lineheight-1)
+      margin: 0 var(--size-1) 0 0
+      position: relative
+      left: 0
+
+// =============================================================================
+// MOBILE FOOTNOTES - INLINE LAYOUT (767px and below)
+// =============================================================================
+
+@media screen and (max-width: calc(breakpoint(md) - 1px))
   .footnote-definition,
   .footnote-definition[id*="left"],
   .footnote-definition:not([id*="left"])
-    // Reset desktop positioning
-    float: none
-    clear: none
+    // Reset all positioning
+    float: none !important
+    clear: none !important
     position: static
-    right: unset
-    left: unset
     
-    // Clean mobile layout - inline with content flow
+    // Inline layout
     display: block
     width: auto
     max-width: none
     margin: var(--size-fluid-2) 0
     padding: var(--size-3) var(--size-3) var(--size-3) var(--size-4)
     
-    // Minimal styling matching desktop aesthetic
+    // Minimal styling
     background: none
     border: none
     border-left: 3px solid var(--border-color-sidenote)
     border-radius: 0
     box-shadow: none
-    
-    // Clean typography - consistent with desktop
     text-align: left
     
-    // Subtle hover effect (much lighter than before)
+    // Hover effect
     transition: border-color $animation-duration-fast $animation-easing-default
     
     &:hover
       border-left-color: var(--text-color)
     
-    // Content styling - closer to desktop
-    > *, 
-    p, 
-    li, 
-    span,
-    strong,
-    em,
-    code
+    // Content styling
+    > *, p, li, span, strong, em, code
       color: var(--muted-color)
       font-size: var(--font-size-0)
       font-weight: var(--font-weight-2)
@@ -246,43 +207,32 @@ sup.footnote-reference
       &:last-of-type
         margin-bottom: 0
     
-    // Footnote labels - minimal and clean
+    // Footnote labels
     sup.footnote-definition-label
       display: inline
       background: none
       color: var(--muted-color)
-      border-radius: 0
-      width: auto
-      height: auto
       font-size: var(--font-size-0)
       font-weight: var(--font-weight-4)
       margin: 0 var(--size-1) 0 0
-      box-shadow: none
       line-height: var(--font-lineheight-1)
-      position: relative
-      float: none
-      left: 0
       
-    // Code styling - minimal
+    // Code styling
     code
       background-color: var(--surface-1)
       padding: var(--size-1) var(--size-1)
       border-radius: var(--radius-1)
-      font-size: var(--font-size-0)
       
-    // Lists - clean styling
-    ol, 
-    ul
+    // Lists
+    ol, ul
       margin: var(--size-2) 0
       padding-inline-start: var(--size-3)
-      padding-inline-end: 0
       text-align: left
       
       li
         margin-bottom: var(--size-1)
-        text-align: left
         
-    // Images - simple styling
+    // Images
     img
       border-radius: var(--radius-1)
       margin: var(--size-2) 0
