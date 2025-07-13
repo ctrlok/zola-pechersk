@@ -1,0 +1,136 @@
+@use 'tokens' as *
+@use 'mixins' as *
+
+// =============================================================================
+// TABLES
+// =============================================================================
+// Professional, minimalist table styles that integrate with the theme system
+
+table
+  width: 100%
+  border-collapse: collapse
+  margin: var(--size-fluid-2) 0
+  font-size: var(--font-size-1)
+  line-height: var(--font-lineheight-2)
+  background: var(--bg-color)
+  border: var(--border-size-1) solid var(--border-color)
+  border-radius: var(--radius-2)
+  overflow: hidden
+
+  // Table header styling
+  thead
+    background: var(--surface-1)
+    
+    th
+      padding: var(--size-2) var(--size-3)
+      text-align: left
+      font-weight: var(--font-weight-3)
+      color: var(--text-color)
+      border-bottom: var(--border-size-1) solid var(--border-color)
+      
+      // Right align numeric columns
+      &.numeric
+        text-align: right
+
+  // Table body styling  
+  tbody
+    tr
+      // No alternating row colors for cleaner look
+      &:nth-child(even)
+        background: transparent
+      
+      // Subtle row hover effect (must come after nth-child to override)
+      &:hover
+        background: var(--surface-1)
+      
+      td
+        padding: var(--size-2) var(--size-3)
+        border-bottom: var(--border-size-1) solid var(--border-color)
+        vertical-align: top
+        color: var(--text-color)
+        
+        // Remove bottom border on last row
+        tr:last-child &
+          border-bottom: none
+        
+        // Right align numeric columns
+        &.numeric
+          text-align: right
+          font-variant-numeric: tabular-nums
+        
+        // Code in tables
+        code
+          font-size: var(--font-size-0)
+          background: var(--surface-2)
+          padding: var(--size-1) var(--size-2)
+          border-radius: var(--radius-1)
+
+// Responsive table handling
+@media screen and (max-width: breakpoint(md))
+  table
+    font-size: var(--font-size-0)
+    
+    th, td
+      padding: var(--size-1) var(--size-2)
+
+// Mobile table optimization
+@media screen and (max-width: breakpoint(sm))
+  table
+    font-size: var(--font-size-00)
+    
+    th, td
+      padding: var(--size-1)
+    
+    // Stack table headers and data on very small screens
+    &.responsive-stack
+      thead
+        display: none
+      
+      tbody, tr, td
+        display: block
+        
+      tr
+        margin-bottom: var(--size-3)
+        border: var(--border-size-1) solid var(--border-color)
+        border-radius: var(--radius-2)
+        padding: var(--size-2)
+        
+      td
+        border-bottom: none
+        position: relative
+        padding-left: 30%
+        
+        &:before
+          content: attr(data-label) ": "
+          position: absolute
+          left: var(--size-2)
+          width: 25%
+          font-weight: var(--font-weight-3)
+          color: var(--muted-color)
+
+// Table variants for different use cases
+.table-compact
+  th, td
+    padding: var(--size-1) var(--size-2)
+  
+  margin: var(--size-fluid-1) 0
+
+.table-striped
+  tbody tr:nth-child(odd)
+    background: var(--surface-1)
+
+.table-bordered
+  th, td
+    border: var(--border-size-1) solid var(--border-color)
+
+// Integration with wide layout system
+.wide table
+  margin: 0 auto
+  
+  // Better spacing in wide layout
+  th, td
+    padding: var(--size-2) var(--size-4)
+  
+  @media screen and (max-width: breakpoint(lg))
+    th, td
+      padding: var(--size-2) var(--size-3)
