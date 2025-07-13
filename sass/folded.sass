@@ -10,77 +10,41 @@
 
 .folded
   position: relative
-  margin: var(--size-fluid-3) 0
-  border-radius: var(--radius-2)
-  overflow: hidden
-  background-color: var(--surface-1)
-  box-shadow: var(--shadow-3)
-  backdrop-filter: blur(4px)
-  transition: transform $animation-duration-fast $animation-easing-default, box-shadow $animation-duration-fast $animation-easing-default
-
-  // Modern accent element
-  &:before
-    content: ""
-    position: absolute
-    left: 0
-    top: 0
-    bottom: 0
-    width: $alert-accent-width
-    background-color: var(--accent-color, var(--surface-1))
-    box-shadow: var(--shadow-3)
-    z-index: $z-accent-bar
-    animation: folded-pulse $animation-duration-pulse infinite alternate
-
-  // Subtle glow effect
-  &:after
-    content: ""
-    position: absolute
-    left: $alert-accent-width
-    top: 0
-    bottom: 0
-    width: $alert-glow-width
-    z-index: $z-glow-effect
-    pointer-events: none
-    backdrop-filter: blur(2px)
-    opacity: $backdrop-opacity
-    background: linear-gradient(90deg, var(--accent-color-transparent, rgba(var(--surface-3-rgb), $accent-opacity)), transparent)
-
-  &:hover
-    transform: translateY($folded-transform-hover)
-    box-shadow: var(--shadow-4)
+  margin: var(--size-2) 0
+  
+  // Minimalistic paradise - almost invisible until needed
+  background: var(--surface-1)
+  border-radius: var(--radius-1)
 
   .folded-header
-    padding: var(--size-4) var(--size-4) var(--size-4) var(--size-6)
+    padding: var(--size-3) var(--size-4)
     cursor: pointer
     display: flex
     justify-content: space-between
     align-items: center
-    font-weight: var(--font-weight-5)
-    color: var(--text-color)
+    
+    // Zen-like typography
+    font-size: var(--font-size-1)
+    font-weight: var(--font-weight-4)
+    line-height: var(--font-lineheight-2)
+    color: var(--text-2)
     user-select: none
-    position: relative
-    z-index: $z-folded-header
-    transition: background-color $animation-duration-fast $animation-easing-default
-
-    &:hover
-      background-color: var(--surface-2)
 
     .folded-arrow
+      // Whisper-quiet indicator
+      color: var(--text-3)
+      font-size: var(--font-size-0)
+      font-weight: var(--font-weight-6)
+      line-height: 1
       transition: transform $animation-duration-medium $animation-easing-default
-      font-size: var(--font-size-2)
-      display: inline-block
-      margin-left: var(--size-3)
-      color: var(--accent-color, var(--text-color))
 
   .folded-content
     max-height: 0
     overflow: hidden
-    transition: max-height $animation-duration-slow $animation-easing-in-out, padding $animation-duration-medium $animation-easing-default
-    padding: 0 var(--size-6) 0 var(--size-6)
+    padding: 0 var(--size-4)
     opacity: 0
-    transform: translateY($folded-transform-offset)
-    transition: max-height $animation-duration-slow $animation-easing-in-out, padding $animation-duration-medium $animation-easing-default, opacity $animation-duration-medium $animation-easing-default, transform $animation-duration-medium $animation-easing-default
-    background-color: var(--surface-1)
+    background: var(--surface-1)
+    transition: max-height $animation-duration-slow $animation-easing-in-out, padding $animation-duration-medium $animation-easing-default, opacity $animation-duration-medium $animation-easing-default
 
     p:first-child
       margin-top: 0
@@ -89,51 +53,23 @@
       margin-bottom: 0
 
   &.active
+    .folded-header
+      color: var(--text-1)
+    
     .folded-arrow
       transform: rotate(180deg)
+      color: var(--text-2)
 
     .folded-content
       max-height: $folded-max-height
-      padding: var(--size-3) var(--size-6) var(--size-4) var(--size-6)
+      padding: var(--size-3) var(--size-4) var(--size-4) var(--size-4)
       opacity: 1
-      transform: translateY(0)
       overflow: auto
 
-// Flavor variations
-.folded.primary
-  &:before
-    background-color: var(--primary)
-
-  &:after
-    background: linear-gradient(90deg, rgba(var(--primary-rgb), 0.3), transparent)
-
-  .folded-arrow
-    color: var(--primary)
-
-.folded.secondary
-  &:before
-    background-color: var(--secondary)
-
-  &:after
-    background: linear-gradient(90deg, rgba(var(--secondary-rgb), 0.3), transparent)
-
-  .folded-arrow
-    color: var(--secondary)
-
-.folded.accent
-  &:before
-    background-color: var(--accent)
-
-  &:after
-    background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.3), transparent)
-
-  .folded-arrow
-    color: var(--accent)
-
-// Media queries for responsive design
+// Responsive - maintain minimal approach
 @media screen and (max-width: $breakpoint-tablet)
   .folded
-    margin: var(--size-fluid-2) 0
+    margin: var(--size-1) 0
 
     .folded-header
-      padding: var(--size-3) var(--size-3) var(--size-3) var(--size-5)
+      padding: var(--size-2) var(--size-3)
