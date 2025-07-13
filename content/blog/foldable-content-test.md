@@ -12,9 +12,9 @@ toc = true
 
 This post demonstrates the **foldable content shortcode** in the Pechersk theme. Foldable sections allow readers to expand and collapse content sections for better organization and reading flow.
 
-## Basic Foldable Sections
+## Basic Foldable Sections {other}
 
-### Simple Text Content
+### Simple Text Content{test}
 
 Here's a basic foldable section with plain text:
 

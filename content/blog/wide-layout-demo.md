@@ -26,11 +26,13 @@ Here's a regular image in normal content width:
 
 ![Regular Image](https://picsum.photos/800/400)
 
-Now the same image in wide layout - notice how it utilizes the full available space including sidenote areas:
+Now the same image in wide layout - notice how it utilizes the full available space including sidenote areas[^wide-image].
 
 {% wide() %}
 ![Wide Image](https://picsum.photos/1200/600)
 {% end %}
+
+[^wide-image]: This wide image demonstrates how the layout system utilizes both sidenote areas on desktop, creating a more immersive visual experience for photography and diagrams.
 
 ## Wide Tables
 
@@ -42,7 +44,7 @@ Regular table:
 | Sidenotes | Left/Right | Right only | Inline |
 | Width | Content width | 90% | 100% |
 
-Wide table with more columns and data:
+Wide table with more columns and data[^left-table]:
 
 {% wide() %}
 | Component | Desktop Width | Tablet Width | Mobile Width | Breakpoint | Grid Columns | Sidenote Behavior | Notes |
@@ -53,6 +55,8 @@ Wide table with more columns and data:
 | Header | Container width | Container width | Container width | Always | N/A | N/A | Navigation and branding |
 | Footer | Container width | Container width | Container width | Always | N/A | N/A | Site information |
 {% end %}
+
+[^left-table]: This technical comparison table shows how different components behave across breakpoints. Notice how wide content ignores sidenote positioning and spans the full available width.
 
 ## Wide Code Blocks
 
@@ -65,7 +69,7 @@ function regularExample() {
 }
 ```
 
-Wide code block for complex examples:
+Wide code block for complex examples[^right-code]:
 
 {% wide() %}
 ```javascript
@@ -98,6 +102,8 @@ class SidenotesManager {
 }
 ```
 {% end %}
+
+[^right-code]: Wide code blocks are perfect for complex examples that would otherwise require horizontal scrolling. The extra width allows for better code readability and longer variable names.
 
 ## Mixed Wide Content
 
