@@ -8,9 +8,8 @@ build_search_index = true
 highlight_code = true
 highlight_theme = "css"
 definition_list = true
-gfm = true
-subsupscript = true
 github_alerts = true
+heading_attributes = true
 
 [languages.ua.translations]
 summary = "Мій блог"
