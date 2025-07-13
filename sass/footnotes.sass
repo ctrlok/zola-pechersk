@@ -114,11 +114,6 @@ sup.footnote-reference
     // Always left-aligned text
     text-align: left !important
     
-    // Hover effect
-    transition: border-color $animation-duration-fast $animation-easing-default
-    
-    &:hover
-      border-left-color: var(--text-color)
     
     // Content styling
     *
@@ -185,11 +180,6 @@ sup.footnote-reference
     box-shadow: none
     text-align: left
     
-    // Hover effect
-    transition: border-color $animation-duration-fast $animation-easing-default
-    
-    &:hover
-      border-left-color: var(--text-color)
     
     // Content styling
     > *, p, li, span, strong, em, code
@@ -258,6 +248,50 @@ sup.footnote-reference
 .footnote-definition:target
   border-left-color: var(--blue-6)
   border-left-width: 4px
+
+// Lightweight CSS-only hover interactions - only for references
+.footnote-reference:hover
+  background: color-mix(in srgb, var(--accent-1, var(--blue-6)) 15%, transparent)
+  border-radius: var(--radius-1)
+  transition: background $animation-duration-fast $animation-easing-default
+
+// Temporary highlight class for mobile scroll
+.sidenote-highlighted
+  border-left-color: var(--accent-1, var(--blue-6)) !important
+  border-left-width: 3px !important
+  background: color-mix(in srgb, var(--accent-1, var(--blue-6)) 8%, transparent)
+
+// Theme flavor support for CSS-only hovers
+html[flavor="happy"] .footnote-reference:hover,
+html[flavor="happy-headers"] .footnote-reference:hover
+  background: color-mix(in srgb, var(--pink-6) 12%, transparent)
+
+html[flavor="deep"] .footnote-reference:hover,
+html[flavor="deep-headers"] .footnote-reference:hover
+  background: color-mix(in srgb, var(--indigo-6) 10%, transparent)
+
+// Mobile highlight for scroll feedback
+html[flavor="happy"] .sidenote-highlighted,
+html[flavor="happy-headers"] .sidenote-highlighted
+  border-left-color: var(--pink-6) !important
+  background: color-mix(in srgb, var(--pink-6) 8%, transparent)
+
+html[flavor="deep"] .sidenote-highlighted,
+html[flavor="deep-headers"] .sidenote-highlighted
+  border-left-color: var(--indigo-6) !important
+  background: color-mix(in srgb, var(--indigo-6) 6%, transparent)
+
+// Screen reader only class
+.sr-only
+  position: absolute
+  width: 1px
+  height: 1px
+  padding: 0
+  margin: -1px
+  overflow: hidden
+  clip: rect(0, 0, 0, 0)
+  white-space: nowrap
+  border: 0
 
 // Print styles - maintain minimal approach
 @media print

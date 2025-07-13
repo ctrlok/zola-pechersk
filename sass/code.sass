@@ -29,9 +29,6 @@ pre,
   // Hover effect
   transition: transform 0.2s ease, box-shadow 0.2s ease
   
-  &:hover
-    transform: translateY(-1px)
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)
 
   // Language badge - Apple-style pill design
   &[data-lang]:before
@@ -60,10 +57,6 @@ pre,
     // Smooth transitions
     transition: all 0.2s ease
   
-  &:hover:before
-    background: rgba(255, 255, 255, 0.25)
-    color: rgba(255, 255, 255, 0.9)
-    border-color: rgba(255, 255, 255, 0.3)
   
   // Language-specific labels
   &[data-lang="javascript"]:before,
@@ -121,10 +114,6 @@ pre,
       border-color: rgba(255, 255, 255, 0.2)
       color: rgba(255, 255, 255, 0.7)
     
-    &:hover:before
-      background: rgba(0, 0, 0, 0.5)
-      border-color: rgba(255, 255, 255, 0.3)
-      color: rgba(255, 255, 255, 0.9)
 
 // Manual dark theme for glass effects
 html[color-scheme="dark"] pre,
@@ -136,10 +125,6 @@ html[color-scheme="dark"] .z-code
     border-color: rgba(255, 255, 255, 0.2)
     color: rgba(255, 255, 255, 0.7)
   
-  &:hover:before
-    background: rgba(0, 0, 0, 0.5)
-    border-color: rgba(255, 255, 255, 0.3)
-    color: rgba(255, 255, 255, 0.9)
 
 // Special case for mermaid diagrams
 pre.mermaid
