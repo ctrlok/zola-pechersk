@@ -31,3 +31,6 @@ color_scheme = "auto"
 #   - "deep": Colorful headers and bold text with gradient-1
 #   - "monochrome": Plain black text for headers and bold text
 flavor = "deep-headers"
+
+# Theme switcher panel (optional)
+theme_switcher = true

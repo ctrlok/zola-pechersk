@@ -2,6 +2,7 @@
 <html lang="{{ lang }}"
 
     {% set color_scheme = config.extra.color_scheme | default(value="auto") %}
+    color-scheme="{{ color_scheme }}"
     {% if config.extra.flavor %}
       flavor="{{ config.extra.flavor }}"
     {% endif %}
@@ -16,13 +17,37 @@
     <link rel="stylesheet" href="{{ get_url(path="override.css") }}">
 </head>
 <body>
+    {% if config.extra.theme_switcher %}
+    <div class="theme-switcher">
+        <div class="switcher-content">
+            <div class="switcher-section">
+                <span class="switcher-label">Theme:</span>
+                <div class="switcher-buttons">
+                    <button class="switcher-button" data-theme="auto">Auto</button>
+                    <button class="switcher-button" data-theme="light">Light</button>
+                    <button class="switcher-button" data-theme="dark">Dark</button>
+                </div>
+            </div>
+            <div class="switcher-section">
+                <span class="switcher-label">Flavor:</span>
+                <div class="switcher-buttons">
+                    <button class="switcher-button" data-flavor="monochrome">Mono</button>
+                    <button class="switcher-button" data-flavor="deep-headers">Deep</button>
+                    <button class="switcher-button" data-flavor="deep">Deep+</button>
+                    <button class="switcher-button" data-flavor="happy-headers">Happy</button>
+                    <button class="switcher-button" data-flavor="happy">Happy+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
     <div class="container">
         <header>
             <a href="{{ config.base_url }}">{{ config.title }}</a>
             {% if section.description %}
                 <p class="subtitle">{{ section.description }}</p>
             {% endif %}
-            <!-- Theme toggle will be inserted here by JavaScript if enabled -->
             <script src={{ get_url(path="js/mermaid.min.js") }}></script>
 
         </header>
@@ -40,6 +65,7 @@
     
     <!-- Custom JavaScript -->
     <script src="{{ get_url(path="js/footnotes.js") }}"></script>
+    <script src="{{ get_url(path="js/main.js") }}"></script>
     <!-- Theme-integrated glass syntax highlighting -->
     <link rel="stylesheet" href="{{ get_url(path="css/syntax-theme-deep-glass-2.css") }}">
     
