@@ -6,3 +6,4 @@ public/
 .vscode/
 static/oldcss
 CLAUDE.md
+tmp/

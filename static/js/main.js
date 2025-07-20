@@ -1,10 +1,43 @@
-mmdElements = document.getElementsByClassName("mermaid");
-const mmdHTML = [];
-for (let i = 0; i < mmdElements.length; i++) {
-	mmdHTML[i] = mmdElements[i].innerHTML;
+// Mermaid.js conditional loading and rendering
+let mmdElements = [];
+let mmdHTML = [];
+let mermaidLoaded = false;
+
+function detectMermaidElements() {
+	mmdElements = document.getElementsByClassName("mermaid");
+	if (mmdElements.length > 0) {
+		// Store original HTML content
+		for (let i = 0; i < mmdElements.length; i++) {
+			mmdHTML[i] = mmdElements[i].innerHTML;
+		}
+		return true;
+	}
+	return false;
+}
+
+function loadMermaidScript() {
+	return new Promise((resolve, reject) => {
+		if (mermaidLoaded) {
+			resolve();
+			return;
+		}
+		
+		const script = document.createElement('script');
+		script.src = '/js/mermaid.min.js';
+		script.onload = () => {
+			mermaidLoaded = true;
+			resolve();
+		};
+		script.onerror = reject;
+		document.head.appendChild(script);
+	});
 }
 
 function mermaidRender(theme) {
+	if (!mermaidLoaded || mmdElements.length === 0) {
+		return;
+	}
+	
 	if (theme == "dark") {
 		initOptions = {
 			startOnLoad: false,
@@ -16,12 +49,40 @@ function mermaidRender(theme) {
 			theme: "neutral",
 		};
 	}
+	
 	for (let i = 0; i < mmdElements.length; i++) {
 		delete mmdElements[i].dataset.processed;
 		mmdElements[i].innerHTML = mmdHTML[i];
 	}
+	
 	mermaid.initialize(initOptions);
 	mermaid.run();
+}
+
+async function initializeMermaid() {
+	if (detectMermaidElements()) {
+		try {
+			await loadMermaidScript();
+			
+			// Determine initial theme
+			const htmlElement = document.documentElement;
+			const colorScheme = htmlElement.getAttribute('color-scheme');
+			let effectiveTheme;
+			
+			if (colorScheme === 'dark') {
+				effectiveTheme = 'dark';
+			} else if (colorScheme === 'light') {
+				effectiveTheme = 'light';
+			} else {
+				// Auto or no attribute - check system preference
+				effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			}
+			
+			mermaidRender(effectiveTheme);
+		} catch (error) {
+			console.error('Failed to load Mermaid.js:', error);
+		}
+	}
 }
 
 function setTheme(theme) {
@@ -37,8 +98,8 @@ function setTheme(theme) {
 	
 	localStorage.setItem('theme', theme);
 	
-	// Handle mermaid re-rendering if needed
-	if (mmdElements.length > 0) {
+	// Handle mermaid re-rendering if needed (only if Mermaid is loaded)
+	if (mermaidLoaded && mmdElements.length > 0) {
 		let effectiveTheme;
 		if (theme === 'auto') {
 			effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -121,6 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Always initialize core theme functionality
 	initializeCoreTheme();
 	
+	// Initialize Mermaid.js only if needed
+	initializeMermaid();
+	
 	// Only initialize theme switcher UI if it exists
 	if (document.querySelector('.theme-switcher')) {
 		initializeThemeSwitcherUI();
@@ -141,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			? (!savedTheme || savedTheme === 'auto')
 			: (!htmlTheme || htmlTheme === 'auto');
 			
-		if (shouldRespond && mmdElements.length > 0) {
+		if (shouldRespond && mermaidLoaded && mmdElements.length > 0) {
 			const effectiveTheme = e.matches ? 'dark' : 'light';
 			mermaidRender(effectiveTheme);
 		}
