@@ -24,27 +24,27 @@ function mermaidRender(theme) {
 	mermaid.run();
 }
 
-function getSystemTheme() {
-	return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
-function getCurrentTheme() {
-	const htmlElement = document.documentElement;
-	const colorScheme = htmlElement.getAttribute('color-scheme');
-	
-	if (colorScheme === 'auto' || !colorScheme) {
-		return getSystemTheme();
-	}
-	return colorScheme;
-}
-
 function setTheme(theme) {
 	const htmlElement = document.documentElement;
-	htmlElement.setAttribute('color-scheme', theme);
+	
+	if (theme === 'auto') {
+		// Remove the attribute to let CSS media queries handle it
+		htmlElement.removeAttribute('color-scheme');
+	} else {
+		// Set explicit theme
+		htmlElement.setAttribute('color-scheme', theme);
+	}
+	
 	localStorage.setItem('theme', theme);
 	
+	// Handle mermaid re-rendering if needed
 	if (mmdElements.length > 0) {
-		const effectiveTheme = theme === 'auto' ? getSystemTheme() : theme;
+		let effectiveTheme;
+		if (theme === 'auto') {
+			effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		} else {
+			effectiveTheme = theme;
+		}
 		mermaidRender(effectiveTheme);
 	}
 }
@@ -89,11 +89,11 @@ function initializeThemeSwitcher() {
 }
 
 function updateActiveStates() {
-	const currentTheme = document.documentElement.getAttribute('color-scheme') || 'auto';
+	const savedTheme = localStorage.getItem('theme') || 'auto';
 	const currentFlavor = document.documentElement.getAttribute('flavor') || 'monochrome';
 	
 	document.querySelectorAll('[data-theme]').forEach(button => {
-		button.classList.toggle('active', button.getAttribute('data-theme') === currentTheme);
+		button.classList.toggle('active', button.getAttribute('data-theme') === savedTheme);
 	});
 	
 	document.querySelectorAll('[data-flavor]').forEach(button => {
@@ -105,4 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (document.querySelector('.theme-switcher')) {
 		initializeThemeSwitcher();
 	}
+	
+	// Listen for system theme changes when in auto mode
+	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+		const savedTheme = localStorage.getItem('theme');
+		if ((!savedTheme || savedTheme === 'auto') && mmdElements.length > 0) {
+			const effectiveTheme = e.matches ? 'dark' : 'light';
+			mermaidRender(effectiveTheme);
+		}
+	});
 });
