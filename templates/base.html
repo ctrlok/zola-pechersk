@@ -18,7 +18,7 @@
 </head>
 <body>
     {% if config.extra.theme_switcher %}
-    <div class="theme-switcher">
+    <div class="theme-switcher" id="theme-switcher">
         <div class="switcher-content">
             <div class="switcher-section">
                 <span class="switcher-label">Theme:</span>
@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+    <button class="theme-switcher-toggle" id="theme-switcher-toggle" title="Toggle theme switcher">⚙</button>
     {% endif %}
     
     <div class="container">
@@ -66,8 +67,6 @@
     <!-- Custom JavaScript -->
     <script src="{{ get_url(path="js/footnotes.js") }}"></script>
     <script src="{{ get_url(path="js/main.js") }}"></script>
-    <!-- Theme-integrated glass syntax highlighting -->
-    <link rel="stylesheet" href="{{ get_url(path="css/syntax-theme-deep-glass-2.css") }}">
-    
+
 </body>
 </html>

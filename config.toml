@@ -33,4 +33,4 @@ color_scheme = "auto"
 flavor = "deep-headers"
 
 # Theme switcher panel (optional)
-theme_switcher = true
+theme_switcher = false
