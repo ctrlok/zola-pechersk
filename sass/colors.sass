@@ -89,26 +89,26 @@
   @if $flavor == "happy" or $flavor == "happy-headers"
     +happy-headers
     @if $flavor == "happy"
-      --font-weight-strong: $font-weight-normal-flavor
+      --font-weight-strong: var(--font-weight-4)
       --flavour-bold-gradient: var(--flavour-header-gradient)
       --flavour-bold-color-text: var(--flavour-header-color-text)
     @else
-      --font-weight-strong: $font-weight-headers-only
+      --font-weight-strong: var(--font-weight-5)
       --flavour-bold-gradient: none
       --flavour-bold-color-text: var(--text-color)
   @else if $flavor == "deep" or $flavor == "deep-headers"
     +deep-headers
     @if $flavor == "deep"
-      --font-weight-strong: $font-weight-normal-flavor
+      --font-weight-strong: var(--font-weight-4)
       --flavour-bold-gradient: var(--flavour-header-gradient)
       --flavour-bold-color-text: var(--flavour-header-color-text)
     @else
-      --font-weight-strong: $font-weight-headers-only
+      --font-weight-strong: var(--font-weight-5)
       --flavour-bold-gradient: none
       --flavour-bold-color-text: var(--text-color)
   @else
     // monochrome (default)
-    --font-weight-strong: $font-weight-headers-only
+    --font-weight-strong: var(--font-weight-5)
     --flavour-header-gradient: none
     --flavour-header-color-text: var(--text-color)
     --flavour-bold-gradient: none
