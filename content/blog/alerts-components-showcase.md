@@ -32,7 +32,7 @@ Which renders as:
 > [!TIP]
 > **Helpful Tip**: Use this alert type for optional information that can improve user experience or workflow. Great for best practices and recommendations.
 
-### Priority Alerts
+#### Priority Alerts
 
 For high-priority information, write:
 
