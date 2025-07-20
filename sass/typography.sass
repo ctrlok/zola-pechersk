@@ -160,29 +160,18 @@ a, :link
     color: var(--text-color) // Keep visited links same color as normal text
     cursor: pointer // Show pointer cursor for visited links too
 
-// Optional border patterns for headers
-.bordered
-  border-bottom: 1px solid var(--border-color)
-  padding-bottom: var(--size-1)
-
-// Sophisticated underscore system - Universal class with animation
+// Simple underscore system - Static gradient underscore like links
 .underscore
   border-bottom: none !important  // Override any existing borders for clean appearance
   position: relative
   
-  &::before
+  &::after
     content: ""
     position: absolute
     left: 0
     right: 0
-    bottom: -2px
+    bottom: 0
     height: 1px
-    background: var(--flavour-header-gradient, var(--border-color))
-    opacity: 0.8
-    transform: scaleX(0)
-    transform-origin: left
-    transition: transform 0.3s ease
+    background: var(--flavour-link-gradient, var(--text-color))
+    opacity: var(--flavour-link-opacity, 0.6)
     pointer-events: none
-    
-  &:hover::before
-    transform: scaleX(1)
