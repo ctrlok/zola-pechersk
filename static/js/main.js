@@ -127,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		initializeThemeSwitcherToggle();
 	}
 	
+	
 	// Listen for system theme changes when in auto mode
 	window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
 		const themeSwitcherEnabled = document.querySelector('.theme-switcher') !== null;

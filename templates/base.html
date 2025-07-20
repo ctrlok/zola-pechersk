@@ -14,7 +14,6 @@
     
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
-    <link rel="stylesheet" href="{{ get_url(path="override.css") }}">
 </head>
 <body>
     {% if config.extra.theme_switcher %}
@@ -45,10 +44,25 @@
     
     <div class="container">
         <header>
-            <a href="{{ config.base_url }}">{{ config.title }}</a>
-            {% if section.description %}
-                <p class="subtitle">{{ section.description }}</p>
-            {% endif %}
+            <div class="header-content">
+{#                <a href="{{ config.base_url }}" class="site-title">{{ config.title }}</a>#}
+                
+                {% if config.extra.menu %}
+                <nav class="main-nav">
+                    <ul class="nav-menu">
+                        {% for item in config.extra.menu %}
+                            <li class="nav-item">
+                                <a href="{{ item.url }}" class="nav-link">{{ item.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+            
+{#            {% if section.description %}#}
+{#                <p class="subtitle">{{ section.description }}</p>#}
+{#            {% endif %}#}
             <script src={{ get_url(path="js/mermaid.min.js") }}></script>
 
         </header>

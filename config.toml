@@ -20,6 +20,13 @@ summary = "My blog"
 [extra]
 author = "John Doe"
 
+# Main navigation menu
+menu = [
+    {name = "Home", url = "/"},
+    {name = "Blog", url = "/blog/"},
+    {name = "About", url = "/about/"}
+]
+
 # Theme settings: auto, light, dark, default = auto
 color_scheme = "auto"
 
