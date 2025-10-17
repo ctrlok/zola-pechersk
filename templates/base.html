@@ -15,7 +15,12 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
     <link rel="stylesheet" href="{{ get_url(path="override.css") }}">
-    
+
+    {% if config.extra.analytics and config.extra.analytics.enabled and config.extra.analytics.umami %}
+    <!-- Umami Analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ config.extra.analytics.umami.website_id }}"></script>
+    {% endif %}
+
 </head>
 <body>
     {% if config.extra.theme_switcher %}

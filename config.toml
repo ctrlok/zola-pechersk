@@ -22,9 +22,9 @@ author = "John Doe"
 
 # Main navigation menu
 menu = [
-    {name = "Home", url = "/"},
-    {name = "Blog", url = "/blog/"},
-    {name = "About", url = "/about/"}
+    { name = "Home", url = "/" },
+    { name = "Blog", url = "/blog/" },
+    { name = "About", url = "/about/" }
 ]
 
 # Theme settings: auto, light, dark, default = auto
@@ -41,3 +41,10 @@ flavor = "deep-headers"
 
 # Theme switcher panel (optional)
 theme_switcher = false
+
+# Analytics configuration
+[extra.analytics]
+enabled = false
+
+[extra.analytics.umami]
+website_id = "YOUR_API_KEY_HERE"
