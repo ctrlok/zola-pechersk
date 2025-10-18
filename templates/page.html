@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block content %}
 <h2 class="post-title">{{ page.title }}</h2>
-<p class="post-description">{{ page.description }}</p>
 {% if page.date %}
 <p class="post-date">
     {{ page.date | date(format="%B %d, %Y") }} {% if config.extra.edit_post and
