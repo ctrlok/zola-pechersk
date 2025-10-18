@@ -42,6 +42,11 @@ flavor = "deep-headers"
 # Theme switcher panel (optional)
 theme_switcher = false
 
+# favicon supports both relative and absolute urls
+# favicon.ico → <your-site>/favicon.ico
+# https://<static-site>/favicon.ico will be as is
+favicon = "favicon.ico"
+
 # Analytics configuration
 [extra.analytics]
 enabled = false

@@ -11,7 +11,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}</title>
-    
+
+    {% if config.extra.favicon %}
+        {% if config.extra.favicon is starting_with("http") %}
+            <link rel="icon" href="{{ config.extra.favicon }}">
+        {% else %}
+            <link rel="icon" href="{{ get_url(path=config.extra.favicon) }}">
+        {% endif %}
+    {% endif %}
+
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
     <link rel="stylesheet" href="{{ get_url(path="override.css") }}">
@@ -48,7 +56,7 @@
     </div>
     <button class="theme-switcher-toggle" id="theme-switcher-toggle" title="Toggle theme switcher">⚙</button>
     {% endif %}
-    
+
     <div class="container">
         <header>
             <div class="header-content">
@@ -76,7 +84,7 @@
             <p>&copy; {{ now() | date(format="%Y") }} {{ config.title }}. All rights reserved.</p>
         </footer>
     </div>
-    
+
     <!-- Custom JavaScript -->
     <script src="{{ get_url(path="js/footnotes.js") }}"></script>
     <script src="{{ get_url(path="js/main.js") }}"></script>
