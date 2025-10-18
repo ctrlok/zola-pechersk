@@ -106,7 +106,7 @@ p.post-date
   font-style: italic
   margin-block-start: 0
   line-height: var(--font-lineheight-1)
-  margin-block-end: var(--size-fluid-3)
+  margin-block-end: var(--size-1)
 
 // Text styling with gradients
 strong, b
@@ -120,7 +120,7 @@ strong, b
 del, s
   position: relative
   text-decoration: none // Remove default strikethrough
-  
+
   &::after
     content: ""
     position: absolute
@@ -139,7 +139,7 @@ a, :link
   color: var(--text-color) // Keep text color normal
   text-decoration: none // Remove default underline
   cursor: pointer // Show pointer cursor like regular links
-  
+
   &::after
     content: ""
     position: absolute
@@ -151,11 +151,11 @@ a, :link
     opacity: var(--flavour-link-opacity, 0.6)
     transition: opacity 0.2s ease, height 0.2s ease
     pointer-events: none
-    
+
   &:hover::after
     opacity: 1
     height: 2px
-    
+
   &:visited
     color: var(--text-color) // Keep visited links same color as normal text
     cursor: pointer // Show pointer cursor for visited links too
@@ -164,7 +164,7 @@ a, :link
 .underscore
   border-bottom: none !important  // Override any existing borders for clean appearance
   position: relative
-  
+
   &::after
     content: ""
     position: absolute
