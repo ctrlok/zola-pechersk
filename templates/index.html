@@ -1,24 +1,22 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %} {% if section.description %}
+<p class="section-description">{{ section.description }}</p>
+{% endif %}
 
-{% block content %}
-    {% if section.description %}
-        <p class="section-description">{{ section.description }}</p>
-    {% endif %}
-
-    <div class="blog-posts">
-        <h2>Latest Posts</h2>
-        {% set blog = get_section(path="blog/_index.md") %}
-        {% for page in blog.pages %}
-            <article class="post-preview">
-                <h3 class="post-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
-                {% if page.date %}
-                    <p class="post-date">{{ page.date | date(format="%B %d, %Y") }}</p>
-                {% endif %}
-                {% if page.description %}
-                    <p class="post-description">{{ page.description }}</p>
-                {% endif %}
-                <a href="{{ page.permalink }}" class="read-more">Read more →</a>
-            </article>
-        {% endfor %}
-    </div>
-{% endblock content %} 
+<div class="blog-posts">
+    <h2>Latest Posts</h2>
+    {% for subsection_path in section.subsections %} {% set subsection =
+    get_section(path=subsection_path) %} {% for page in subsection.pages %}
+    <article class="post-preview">
+        <h3 class="post-title">
+            <a href="{{ page.permalink }}">{{ page.title }}</a>
+        </h3>
+        {% if page.date %}
+        <p class="post-date">{{ page.date | date(format="%B %d, %Y") }}</p>
+        {% endif %} {% if page.description %}
+        <p class="post-description">{{ page.description }}</p>
+        {% endif %}
+        <a href="{{ page.permalink }}" class="read-more">Read more →</a>
+    </article>
+    {% endfor %} {% endfor %}
+</div>
+{% endblock content %}
