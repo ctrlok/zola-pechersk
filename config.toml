@@ -48,3 +48,7 @@ enabled = false
 
 [extra.analytics.umami]
 website_id = "YOUR_API_KEY_HERE"
+
+# Edit post configuration
+[extra.edit_post]
+github_repo = "ctrlok/sevarocks"

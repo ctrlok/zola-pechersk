@@ -1,11 +1,16 @@
-{% extends "base.html" %}
-
-{% block content %}
-    <h2 class="post-title">{{ page.title }}</h2>
-    <p class="post-description"> {{ page.description }}</p>
-    {% if page.date %}
-        <p class="post-date">{{ page.date | date(format="%B %d, %Y") }}</p>
+{% extends "base.html" %} {% block content %}
+<h2 class="post-title">{{ page.title }}</h2>
+<p class="post-description">{{ page.description }}</p>
+{% if page.date %}
+<p class="post-date">
+    {{ page.date | date(format="%B %d, %Y") }} {% if config.extra.edit_post and
+    config.extra.edit_post.github_repo %} ·
+    <a
+        href="https://github.com/{{ config.extra.edit_post.github_repo }}/tree/main/content/{{ page.relative_path }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Edit this page on GitHub</a
+    >
     {% endif %}
-    
-    {{ page.content | safe }}
-{% endblock content %} 
+</p>
+{% endif %} {{ page.content | safe }} {% endblock content %}
