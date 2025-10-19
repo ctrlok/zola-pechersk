@@ -1,6 +1,6 @@
 base_url = "/"
-title = "My Blog"
-description = "A demonstration of Markdown elements"
+title = "Pechersk Theme Blog"
+description = "A demonstration of Pechersk Zola Theme"
 compile_sass = true
 build_search_index = true
 
@@ -56,4 +56,4 @@ website_id = "YOUR_API_KEY_HERE"
 
 # Edit post configuration
 [extra.edit_post]
-github_repo = "ctrlok/sevarocks"
+github_repo = "ctrlok/zola-pechersk"
