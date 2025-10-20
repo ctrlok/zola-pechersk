@@ -10,6 +10,7 @@ highlight_theme = "css"
 definition_list = true
 github_alerts = true
 heading_attributes = true
+lazy_async_image = true
 
 [languages.ua.translations]
 summary = "Мій блог"

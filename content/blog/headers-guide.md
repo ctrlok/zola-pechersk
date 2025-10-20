@@ -1,6 +1,7 @@
 +++
 title = "Headers Guide"
 date = 2025-01-20
+updated = 2025-10-19
 description = "Quick guide to using headers in the Pechersk theme"
 +++
 

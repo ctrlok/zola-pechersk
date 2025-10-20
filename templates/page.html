@@ -2,8 +2,9 @@
 <h2 class="post-title">{{ page.title }}</h2>
 {% if page.date %}
 <p class="post-date">
-    {{ page.date | date(format="%B %d, %Y") }} {% if config.extra.edit_post and
-    config.extra.edit_post.github_repo %} ·
+    {{ page.date | date(format="%B %d, %Y") }}{% if page.updated %} • Updated:
+    {{ page.updated | date(format="%B %d, %Y") }}{% endif %} {% if
+    config.extra.edit_post and config.extra.edit_post.github_repo %} ·
     <a
         href="https://github.com/{{ config.extra.edit_post.github_repo }}/tree/main/content/{{ page.relative_path }}"
         target="_blank"

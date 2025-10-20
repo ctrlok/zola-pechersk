@@ -6,7 +6,7 @@ description = "A demonstration of how you can make content wider"
 
 Here is an example of how to make content wider.
 
-![/cat1.jpg](./cat1.jpg)
+![cat1.jpg](./cat1.jpg)
 
 
 ```markdown

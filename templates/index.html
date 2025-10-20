@@ -11,7 +11,10 @@
             <a href="{{ page.permalink }}">{{ page.title }}</a>
         </h3>
         {% if page.date %}
-        <p class="post-date">{{ page.date | date(format="%B %d, %Y") }}</p>
+        <p class="post-date">
+            {{ page.date | date(format="%B %d, %Y") }}{% if page.updated %} •
+            Updated: {{ page.updated | date(format="%B %d, %Y") }}{% endif %}
+        </p>
         {% endif %} {% if page.description %}
         <p class="post-description">{{ page.description }}</p>
         {% endif %}
