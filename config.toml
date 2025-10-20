@@ -21,6 +21,9 @@ summary = "My blog"
 [extra]
 author = "John Doe"
 
+og_image = "/favicon.ico"
+twitter_username = "<your_twitter_username>"
+
 # Main navigation menu
 menu = [
     { name = "Home", url = "/" },
